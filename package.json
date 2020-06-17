@@ -10,7 +10,14 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
-  "keywords": ["Project Management", "Node.js", "React", "Express", "","MERN Stack"],
+  "keywords": [
+    "Project Management",
+    "Node.js",
+    "React",
+    "Express",
+    "MySQL",
+    "MERN Stack"
+  ],
   "author": "Soban Farhan",
   "license": "MIT",
   "dependencies": {
