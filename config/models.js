@@ -83,5 +83,7 @@ module.exports = {
     User,
     Plan,
     Board,
-    BoardTab
+    BoardTab,
+    TabUser,
+    TabCard    
 }
