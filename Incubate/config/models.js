@@ -1,5 +1,4 @@
 const { Sequelize, DataTypes } = require('sequelize');
-// var json = require('json');
 const db = require('./database')
 
 const Plan = db.define('Plan', {
