@@ -63,6 +63,25 @@ const TabCard = db.define('TabCard', {
     isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
 }, { tableName: 'tblTabCards', createdAt: false, updatedAt: false, })
 
+const CardTask = db.define('CardTask', {
+    taskID: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, },
+    cardID: { type: DataTypes.INTEGER, references: { model: TabCard, key: 'cardID' }, allowNull: false },
+    name: { type: DataTypes.STRING(50), allowNull: false, },
+    description: { type: DataTypes.STRING, allowNull: true },
+    additionalDetail: { 
+        type: DataTypes.STRING, allowNull: false, 
+        get() { 
+            return JSON.parse(this.getDataValue('additionalDetail')) 
+        },
+        set(val) { 
+            this.setDataValue('additionalDetail', JSON.stringify(val)) 
+        } 
+    },
+    dueDate: { type: DataTypes.DATE, allowNull: true },
+    isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+}, { tableName: 'tblCardTasks', createdAt: false, updatedAt: false, })
+
+
 const createAll = async () => {
     await db.sync({ force: true })
     await Plan.create({
@@ -84,5 +103,6 @@ module.exports = {
     Board,
     BoardTab,
     TabUser,
-    TabCard    
+    TabCard,
+    CardTask    
 }
