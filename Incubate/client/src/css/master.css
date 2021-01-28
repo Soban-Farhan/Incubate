@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;500;800&display=swap');
 
+.input-style {
+    border: none;
+    border-bottom: 1px solid #d0d1cc;
+    outline: none;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    width: 100%;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}
+
+.input-style:focus {
+    border-bottom: 1px solid black;
+}
+
+.input-style::-webkit-input-placeholder { 
+    color: #acacac;
+}
+
 ::-webkit-scrollbar {
     width: 7px;
 }
@@ -11,7 +32,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background-color: black;
+    background-color: #202020;
     opacity: 0;
     border-radius: 25px;
 }
@@ -27,8 +48,8 @@
 .font-karla {
     font-family: 'Karla';
     font-weight: 300;
-    font-size: 34px;
-    line-height: 48px;
+    font-size: 20px;
+    line-height: 24px;
 }
 
 .font-karla-normal {
