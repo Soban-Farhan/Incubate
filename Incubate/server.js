@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const db = require('./config/database')
-const database = require('./routes/database')
+const urls = require('./routes/methods')
 const io = require('socket.io')();
 require('dotenv').config();
 
@@ -15,7 +15,7 @@ db.authenticate()
         app.use(bodyParser.urlencoded({extended:true}));
         app.use(bodyParser.json());
         
-        app.use('/api', database)
+        app.use('/api', urls)
 
         app.listen(port, () => {
             console.log('Server is running on port: ' + port );

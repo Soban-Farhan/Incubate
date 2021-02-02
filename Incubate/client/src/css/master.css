@@ -68,8 +68,8 @@ input[type=checkbox] {
 
 @media screen and (max-width: 990px) { 
     .font-karla {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 18px;
+        line-height: 22px;
     }
 
     .font-karla-heavy {
