@@ -15,7 +15,6 @@ class Login extends Component {
             emailError: null,
             passwordError: null,
             otherError: null,
-            isValid: null,
             isLoading: true,
         };
 
@@ -23,43 +22,64 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleSubmit = (event) => {
+    postData = async (url = '', data = {}) => {
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+        alert(response.json())
+        return response.json(); // parses JSON response into native JavaScript objects
+    }
+
+    handleSubmit = async (event) => {
+
+        let url = "http://localhost:5000/api/auth/login";
 
         let email = this.state.email;
         let password = this.state.password;
+        let isValid = true;
 
         this.setState({
             emailError: null,
             passwordError: null,
-            isValid: true
+            otherError: null
         })
 
         if (email.trim() === '') {
-            this.setState({ 
-                emailError: "Email is a required field. Enter your email.",
-                isValid: false 
-            });
+            this.setState({ emailError: "Enter your email." });
+            isValid = false;
         } else if (!email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-            this.setState({ 
-                emailError: "Please enter a valid email. Please try again.",
-                isValid: false 
-            });
+            this.setState({ emailError: "Please enter a valid email. Please try again." });
+            isValid = false;
         }
 
         if (password.trim() === '') {
-            this.setState({ 
-                passwordError: "Password is a required field. Enter your password.",
-                isValid: false 
-            });
+            this.setState({ passwordError: "Enter your password." });
+            isValid = false;
         }
 
-        if (this.state.isValid) {
+        if (isValid) {
+            
             this.setState({
                 otherError: "Form is valid"
             })
+            
+            await this.postData(url, { 
+                emailAddress: email,
+                password: password
+            })
+            // .then(data => {
+            //     console.log('Success:', data.status);
+            // })
+            
         }
-
+        
         return event.preventDefault();
+        
     };
 
     handleChange = (event) => {

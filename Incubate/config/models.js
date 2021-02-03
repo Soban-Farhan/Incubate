@@ -21,7 +21,7 @@ const User = db.define('User', {
     lastName: { type: DataTypes.STRING(50), allowNull: false, },
     emailAddress: { type: DataTypes.STRING, allowNull: false, unique: true, },
     password: { type: DataTypes.STRING, allowNull: false, },
-    PlanID: { type: DataTypes.INTEGER, references: { model: Plan, key: 'planID' }, allowNull: false, defaultValue: 0 },
+    PlanID: { type: DataTypes.INTEGER, references: { model: Plan, key: 'planID' }, allowNull: false, defaultValue: 1 },
 }, { tableName: 'tblUsers', createdAt: false, updatedAt: false, })
 
 const Board = db.define('Board', {
@@ -89,6 +89,13 @@ const createAll = async () => {
         description: { boards: 5, tabs: 4, teamboards: 5 }, 
         cost: 0.00
     })
+
+    await User.create({ 
+        firstName: 'Soban',
+        lastName: "Farhan",
+        emailAddress: 'sobanfarhan@gmail.com', 
+        password: '9eb990eef14e2c65311169bbda3d63997c306ee180ec386f6b8286f47520c443'
+    });
 }
 
 const deleteAll = async () => {
