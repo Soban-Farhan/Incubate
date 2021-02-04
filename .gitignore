@@ -1,2 +1,6 @@
 
 Incubate/.env
+
+Incubate/node_modules/
+
+Incubate/client/node_modules
