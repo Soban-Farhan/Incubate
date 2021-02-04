@@ -1,6 +1,8 @@
 import React, { Component }from 'react';
 import '../css/master.css';
 import banner from '../images/loginBanner.jpg'
+import sha256 from 'js-sha256';
+import postData from '../includes/function'
 
 // Bootstrap
 import { Container, Col, Row, Card } from 'react-bootstrap';
@@ -14,7 +16,7 @@ class Login extends Component {
             password: '',
             emailError: null,
             passwordError: null,
-            otherError: null,
+            otherError: false,
             isLoading: true,
         };
 
@@ -22,20 +24,9 @@ class Login extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    postData = async (url = '', data = {}) => {
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
-        alert(response.json())
-        return response.json(); // parses JSON response into native JavaScript objects
-    }
+    handleSubmit = async (e) => {
 
-    handleSubmit = async (event) => {
+        e.preventDefault();
 
         let url = "http://localhost:5000/api/auth/login";
 
@@ -46,7 +37,7 @@ class Login extends Component {
         this.setState({
             emailError: null,
             passwordError: null,
-            otherError: null
+            otherError: false
         })
 
         if (email.trim() === '') {
@@ -64,22 +55,21 @@ class Login extends Component {
 
         if (isValid) {
             
-            this.setState({
-                otherError: "Form is valid"
-            })
-            
-            await this.postData(url, { 
+            await postData(url, { 
                 emailAddress: email,
-                password: password
+                password: sha256(password)
             })
-            // .then(data => {
-            //     console.log('Success:', data.status);
-            // })
-            
+            .then((res) => {
+                if (res === "OK") {
+                    // window.location = "/";
+                    console.log(res)
+                } else if (res === "NOT FOUND") {
+                    this.setState({
+                        otherError: true
+                    })
+                }
+            })
         }
-        
-        return event.preventDefault();
-        
     };
 
     handleChange = (event) => {
@@ -95,11 +85,21 @@ class Login extends Component {
                     <img className="card-img-top img-fluid" src={banner} alt="" />
                     <div className="card-body">
                         <form onSubmit={this.handleSubmit}>
-                            <div className="p-3" />
+                            <div className="p-4" />
                             <Row>
-                                {/* <Col lg={2}/> */}
                                 <Col lg={{ span: 8, offset: 2 }}>
-                                    <p className="p-1"></p>
+                                    { this.state.otherError ? 
+                                        <Row>
+                                            <Col lg={12}>
+                                                <p className="p-4 font-karla text-center text-light bg-danger rounded">
+                                                    We couldn’t find an account matching the username and password you entered.
+                                                    Please check your username and password and try again.
+                                                </p>
+                                            </Col>
+                                            <div className="p-3" />
+                                        </Row>
+                                    : <></> }
+                                    <div className="p-1" />
                                     <Row>       
                                         <Col lg={2} className="text-left">
                                             <label className="font-karla"> <strong> Email: </strong> </label>
@@ -123,16 +123,12 @@ class Login extends Component {
                                             <div style={{ color: "red" }}>
                                             <p> { this.state.passwordError != null ? <>*{this.state.passwordError}</> : "" } &nbsp; </p>
                                             </div>
-                                            <div style={{ color: "red" }}>
-                                                <p> { this.state.otherError != null ? <>*{this.state.otherError}</> : "" } </p>
-                                            </div>
                                         </Col>
                                     </Row>
-                                    <p className="p-1"></p>
                                     <Row>
-                                        <div className="col-lg-10 offset-lg-2 text-right">
-                                            <button type="submit" className="btn btn-outline-dark btn-md"> Login </button>
-                                        </div>
+                                        <Col lg={{ span: 10, offset: 2 }} className="text-right">
+                                            <button type="submit" className="btn btn-outline-dark btn-md font-karla"> Sign In </button>
+                                        </Col>
                                     </Row>
                                     <div className="p-3"/>
                                 </Col>
