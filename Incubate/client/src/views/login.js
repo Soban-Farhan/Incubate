@@ -16,8 +16,8 @@ class Login extends Component {
             password: '',
             emailError: null,
             passwordError: null,
-            otherError: false,
-            isLoading: true,
+            otherError: [ false, "" ],
+            // isLoading: true,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,7 +37,7 @@ class Login extends Component {
         this.setState({
             emailError: null,
             passwordError: null,
-            otherError: false
+            otherError: [ false, "" ]
         })
 
         if (email.trim() === '') {
@@ -61,14 +61,33 @@ class Login extends Component {
             })
             .then((res) => {
                 if (res === "OK") {
-                    // window.location = "/";
                     console.log(res)
                 } else if (res === "NOT FOUND") {
                     this.setState({
-                        otherError: true
+                        otherError: [
+                            true,
+                            "We couldn’t find an account matching the username and password you entered."
+                            + " Please check your username and password and try again."
+                        ]
                     })
-                }
+                } else {
+                    this.setState({
+                        otherError: [
+                            true,
+                            "The server encountered an internal error or misconfiguration and " 
+                            + "was unable to complete your request." ]
+                    })
+                } 
             })
+            .catch(
+                this.setState({
+                    otherError: [
+                        true,
+                        "The server encountered an internal error or misconfiguration and " 
+                        + "was unable to complete your request." ]
+                })
+            )
+
         }
     };
 
@@ -88,12 +107,11 @@ class Login extends Component {
                             <div className="p-4" />
                             <Row>
                                 <Col lg={{ span: 8, offset: 2 }}>
-                                    { this.state.otherError ? 
+                                    { this.state.otherError[0] ? 
                                         <Row>
                                             <Col lg={12}>
                                                 <p className="p-4 font-karla text-center text-light bg-danger rounded">
-                                                    We couldn’t find an account matching the username and password you entered.
-                                                    Please check your username and password and try again.
+                                                    { this.state.otherError[1] }
                                                 </p>
                                             </Col>
                                             <div className="p-3" />

@@ -2,18 +2,23 @@ const router = require('express').Router();
 const models = require("../config/models");
 
 router.post('/auth/login', async (req, res) => {
-    const user = await models.User.findOne({ 
-        where: { 
-            emailAddress: req.body.emailAddress, 
-            password: req.body.password
-        } 
-    });
+    try {
+        const user = await models.User.findOne({ 
+            where: { 
+                emailAddress: req.body.emailAddress, 
+                password: req.body.password
+            } 
+        });
+        
+        if (user === null) {
+            return res.status(404).json("NOT FOUND")
+        }
     
-    if (user === null) {
-        return res.status(404).json("NOT FOUND")
+        return res.status(200).json("OK")
+    } catch (error) {
+        return res.status(500)
     }
-
-    return res.status(200).json("OK")
+    
 })
 
 
