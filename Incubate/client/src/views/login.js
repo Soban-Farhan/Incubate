@@ -1,4 +1,4 @@
-import React, { Component }from 'react';
+import React, { Component } from 'react';
 import '../css/master.css';
 import banner from '../images/loginBanner.jpg'
 import sha256 from 'js-sha256';
@@ -93,8 +93,8 @@ class Login extends Component {
 
     handleChange = (event) => {
         let nam = event.target.name;
-        let val = event.target.value;
-        this.setState({ [nam]: val.trim() });
+        let val = event.target.value.trim();
+        this.setState({ [nam]: val });
     }
 
     render() {
@@ -126,7 +126,7 @@ class Login extends Component {
                                             <input name="email" className="input-style font-karla" 
                                                 value={this.state.email} onChange={this.handleChange} />
                                             <div style={{ color: "red" }}>
-                                                <p> { this.state.emailError != null ? <>*{this.state.emailError}</> : "" } &nbsp; </p>
+                                                <p> { this.state.emailError != null ? <><i class="fas fa-exclamation-circle"/> {this.state.emailError}</> : "" } &nbsp; </p>
                                             </div>
                                         </Col>
                                     </Row>
@@ -139,7 +139,7 @@ class Login extends Component {
                                             <input name="password" type="password" className="input-style font-karla" 
                                                 value={this.state.password} onChange={this.handleChange} />
                                             <div style={{ color: "red" }}>
-                                            <p> { this.state.passwordError != null ? <>*{this.state.passwordError}</> : "" } &nbsp; </p>
+                                            <p> { this.state.passwordError != null ? <><i class="fas fa-exclamation-circle"/> {this.state.passwordError}</> : "" } &nbsp; </p>
                                             </div>
                                         </Col>
                                     </Row>

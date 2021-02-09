@@ -18,7 +18,25 @@ router.post('/auth/login', async (req, res) => {
     } catch (error) {
         return res.status(500)
     }
+})
+
+router.post('/auth/register', async (req, res) => {
+    // try {
+    //     const user = await models.User.findOne({ 
+    //         where: { 
+    //             emailAddress: req.body.emailAddress, 
+    //             password: req.body.password
+    //         } 
+    //     });
+        
+    //     if (user === null) {
+    //         return res.status(404).json("NOT FOUND")
+    //     }
     
+    return res.status(200).json("OK")
+    // } catch (error) {
+        // return res.status(500)
+    // }
 })
 
 

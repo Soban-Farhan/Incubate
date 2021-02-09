@@ -14,7 +14,7 @@ export const App = () => {
         {/* <Route exact path="/" component={Index} /> */}
         <Route exact path="/" component={Login} />
         <Route exact path="/Identity/Account/Login" component={Login} />
-        <Route exact path="/register" component={Register} />
+        <Route exact path="/Identity/Account/Register" component={Register} />
       </Switch>
     </BrowserRouter>
   );
