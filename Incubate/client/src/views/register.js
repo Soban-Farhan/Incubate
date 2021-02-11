@@ -24,6 +24,7 @@ class Register extends Component {
             hasLowerCase: false,
             hasNumber: false,
             hasCharacter: false,
+            hasValidLength: false,
             otherError: [ false, "" ],
         };
 
@@ -44,7 +45,10 @@ class Register extends Component {
         let isValid = true;
 
         this.setState({
+            firstNameError: null,
+            lastNameError: null,
             emailError: null,
+            isEmpty: false,
             otherError: [ false, "" ]
         })
 
@@ -65,6 +69,16 @@ class Register extends Component {
             this.setState({ emailError: "Please enter a valid email. Please try again." });
             isValid = false;
         }
+
+        if ( this.state.isEmpty || this.state.isEmpty === null) {
+          this.setState({ isEmpty: true })
+          isValid = false;
+        } else if (!(this.state.hasUpperCase && this.state.hasLowerCase 
+                  && this.state.hasNumber && this.state.hasCharacter && this.state.hasValidLength)) {
+          isValid = false;
+        }
+
+        console.log(isValid)
 
         // if (isValid) {
             
@@ -112,11 +126,17 @@ class Register extends Component {
 
       if (nam === 'password') {
         this.setState({ isEmpty: null })
-
+        
         if (val === '') {
           this.setState({ isEmpty: true })
         } else {
           this.setState({ isEmpty: false })
+
+          if (val.length > 7 && val.length < 30) {
+            this.setState({ hasValidLength: true })
+          } else {
+            this.setState({ hasValidLength: false })
+          }
 
           if (/\d/.test(val)) {
             this.setState({ hasNumber: true })
@@ -183,7 +203,7 @@ class Register extends Component {
                                           <input name="firstName" type="text" className="input-style font-karla" 
                                               value={this.state.firstName} onChange={this.handleChange} />
                                           <div style={{ color: "red" }}>
-                                              <p> { this.state.firstNameError != null ? <><i class="fas fa-exclamation-circle"/> {this.state.firstNameError}</> : "" } &nbsp; </p>
+                                              <p> { this.state.firstNameError != null ? <><i className="fas fa-exclamation-circle"/> {this.state.firstNameError}</> : "" } &nbsp; </p>
                                           </div>
                                       </Col>
                                     </Row>
@@ -198,7 +218,7 @@ class Register extends Component {
                                           <input name="lastName" type="text" className="input-style font-karla" 
                                               value={this.state.lastName} onChange={this.handleChange} />
                                           <div style={{ color: "red" }}>
-                                              <p> { this.state.lastNameError != null ? <><i class="fas fa-exclamation-circle"/> {this.state.lastNameError}</> : "" } &nbsp; </p>
+                                              <p> { this.state.lastNameError != null ? <><i className="fas fa-exclamation-circle"/> {this.state.lastNameError}</> : "" } &nbsp; </p>
                                           </div>
                                       </Col>
                                     </Row>
@@ -213,7 +233,7 @@ class Register extends Component {
                                         <input name="email" className="input-style font-karla" 
                                             value={this.state.email} onChange={this.handleChange} />
                                         <div style={{ color: "red" }}>
-                                            <p> { this.state.emailError != null ? <><i class="fas fa-exclamation-circle"/> {this.state.emailError}</> : "" } &nbsp; </p>
+                                            <p> { this.state.emailError != null ? <><i className="fas fa-exclamation-circle"/> {this.state.emailError}</> : "" } &nbsp; </p>
                                         </div>
                                     </Col>
                                 </Row>
@@ -234,28 +254,28 @@ class Register extends Component {
                                             this.state.isEmpty === true ?
 
                                               <div style={{ color: "red" }}>
-                                                <p><i class="fas fa-exclamation-circle text-danger"/> Enter a password.</p>
+                                                <p><i className="fas fa-exclamation-circle text-danger"/> Enter a password.</p>
                                               </div>
                                             : 
                                             
                                               <>
                                                 <div className="p-2" />
-                                                <p className="font-karla-small">
+                                                <div className="font-karla-small">
                                                   Password should meet the follow requirements:
                                                   <div className="p-1"> 
-                                                    { this.state.password.length > 7 && this.state.password.length < 30 ? <><i class="fas fa-check text-success"/>&nbsp;</> : 
-                                                    <><i class="fas fa-exclamation-circle text-danger"/>&nbsp;</> }
-                                                    Must be between 7 to 30 length.<br/>
-                                                    { this.state.hasUpperCase ? <><i class="fas fa-check text-success"/>&nbsp;</> : <><i class="fas fa-exclamation-circle text-danger"/>&nbsp;</> } 
+                                                    { this.state.hasValidLength ? <><i className="fas fa-check text-success"/>&nbsp;</> : 
+                                                    <><i className="fas fa-exclamation-circle text-danger"/>&nbsp;</> }
+                                                    Must be between 7 and 30 length.<br/>
+                                                    { this.state.hasUpperCase ? <><i className="fas fa-check text-success"/>&nbsp;</> : <><i className="fas fa-exclamation-circle text-danger"/>&nbsp;</> } 
                                                     Must contain at least one upper case. (ex: A, B, C)<br/>
-                                                    { this.state.hasLowerCase ? <><i class="fas fa-check text-success"/>&nbsp;</> : <><i class="fas fa-exclamation-circle text-danger"/>&nbsp;</> } 
+                                                    { this.state.hasLowerCase ? <><i className="fas fa-check text-success"/>&nbsp;</> : <><i className="fas fa-exclamation-circle text-danger"/>&nbsp;</> } 
                                                     Must contain at least one lower case. (ex: a, b, c)<br/>
-                                                    { this.state.hasCharacter ? <><i class="fas fa-check text-success"/>&nbsp;</> : <><i class="fas fa-exclamation-circle text-danger"/>&nbsp;</> } 
+                                                    { this.state.hasCharacter ? <><i className="fas fa-check text-success"/>&nbsp;</> : <><i className="fas fa-exclamation-circle text-danger"/>&nbsp;</> } 
                                                     Must contain at least one special character (ex: $, @, %)<br/>
-                                                    { this.state.hasNumber ? <><i class="fas fa-check text-success"/>&nbsp;</> : <><i class="fas fa-exclamation-circle text-danger"/>&nbsp;</> } 
+                                                    { this.state.hasNumber ? <><i className="fas fa-check text-success"/>&nbsp;</> : <><i className="fas fa-exclamation-circle text-danger"/>&nbsp;</> } 
                                                     Must contain at least one number. (ex: 1, 2, 3)<br/>
                                                   </div>
-                                                </p>
+                                                </div>
                                               </>
                                           }
                                         
