@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../css/master.css';
 import banner from '../images/loginBanner.jpg'
-// import sha256 from 'js-sha256';
-// import postData from '../includes/function'
+import sha256 from 'js-sha256';
+import postData from '../includes/function'
 
 // Bootstrap
 import { Container, Col, Row, Card } from 'react-bootstrap';
@@ -78,44 +78,42 @@ class Register extends Component {
           isValid = false;
         }
 
-        console.log(isValid)
-
-        // if (isValid) {
+        if (isValid) {
             
-        //     await postData(url, { 
-        //         emailAddress: email,
-        //         password: sha256(password)
-        //     })
-        //     .then((res) => {
-        //         if (res === "OK") {
-        //             console.log(res)
-        //         } else if (res === "NOT FOUND") {
-        //             this.setState({
-        //                 otherError: [
-        //                     true,
-        //                     "We couldn’t find an account matching the username and password you entered."
-        //                     + " Please check your username and password and try again."
-        //                 ]
-        //             })
-        //         } else {
-        //             this.setState({
-        //                 otherError: [
-        //                     true,
-        //                     "The server encountered an internal error or misconfiguration and " 
-        //                     + "was unable to complete your request." ]
-        //             })
-        //         } 
-        //     })
-        //     .catch(
-        //         this.setState({
-        //             otherError: [
-        //                 true,
-        //                 "The server encountered an internal error or misconfiguration and " 
-        //                 + "was unable to complete your request." ]
-        //         })
-        //     )
-
-        // }
+          await postData(url, { 
+              firstName: firstName,
+              lastName: lastName,
+              emailAddress: email,
+              password: sha256(password)
+          })
+          .then((res) => {
+              if (res === "OK") {
+                  console.log(res)
+              } else if (res === "FOUND") {
+                  this.setState({
+                      otherError: [
+                          true,
+                          "That email address is already in use, please use a different email address."
+                      ]
+                  })
+              } else {
+                  this.setState({
+                      otherError: [
+                          true,
+                          "The server encountered an internal error or misconfiguration and " 
+                          + "was unable to complete your request." ]
+                  })
+              } 
+          })
+          .catch(err => {
+              this.setState({
+                  otherError: [
+                      true,
+                      "The server encountered an internal error or misconfiguration and " 
+                      + "was unable to complete your request." ]
+              })
+          })
+        }
     };
 
     handleChange = (event) => {
