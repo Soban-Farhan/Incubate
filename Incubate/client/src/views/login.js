@@ -144,8 +144,9 @@ class Login extends Component {
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <Col lg={{ span: 10, offset: 2 }} className="text-right">
-                                            <button type="submit" className="btn btn-outline-dark btn-md font-karla"> Sign In </button>
+                                        <Col lg={{ span: 10, offset: 2 }} className="font-karla">
+                                            <button type="submit" className="btn btn-outline-dark btn-md font-karla"> &nbsp;&nbsp; Login &nbsp;&nbsp; </button>
+                                            <span> &nbsp; or &nbsp;<a href="/Identity/Account/Register">Sign Up </a></span>
                                         </Col>
                                     </Row>
                                     <div className="p-3"/>

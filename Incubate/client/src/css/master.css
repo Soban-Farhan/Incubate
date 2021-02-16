@@ -2,6 +2,7 @@
 
 body {
     height: 100%;
+    transition: .3s all;
 }
 
 .input-style {

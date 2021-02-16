@@ -12,7 +12,7 @@ export const App = () => {
     <BrowserRouter>
       <Switch>
         {/* <Route exact path="/" component={Index} /> */}
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={Register} />
         <Route exact path="/Identity/Account/Login" component={Login} />
         <Route exact path="/Identity/Account/Register" component={Register} />
       </Switch>
