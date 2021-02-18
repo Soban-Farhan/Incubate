@@ -11,12 +11,12 @@ router.post('/auth/login', async (req, res) => {
         });
         
         if (user === null) {
-            return res.status(404).json("NOT FOUND")
+            return res.status(404).json({ status: "NOT FOUND" })
         }
     
-        return res.status(200).json("OK")
-    } catch (error) {
-        return res.status(500)
+        return res.status(200).json({ status: "OK", userID: user.userID })
+    } catch (err) {
+        return res.status(500).json(err)
     }
 })
 
@@ -34,9 +34,9 @@ router.post('/auth/register', async (req, res) => {
                     password: req.body.password
                 })
 
-                return res.status(200).json("OK")
+                return res.status(200).json({ status: "OK" })
             } else {
-                return res.status(409).json("FOUND")
+                return res.status(409).json({ status: "FOUND" })
             }
         })
         .catch(err => {
@@ -45,23 +45,6 @@ router.post('/auth/register', async (req, res) => {
     } catch (error) {
         return res.status(500).json(err)
     }
-    // try {
-    //     const user = await models.User.findOne({ 
-    //         where: { 
-    //             emailAddress: req.body.emailAddress, 
-    //         } 
-    //     });
-        
-    //     if (user !== null) {
-    //         return res.status(409).json("FOUND")
-    //     }
-        
-
-
-    //     return res.status(200).json("OK")
-    // } catch (error) {
-    //     return res.status(500)
-    // }
 })
 
 

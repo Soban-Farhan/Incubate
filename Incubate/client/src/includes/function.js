@@ -1,4 +1,4 @@
-import * as Cookies from "js-cookie";
+var myStorage = window.sessionStorage;
 
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
@@ -12,22 +12,22 @@ const postData = async (url = '', data = {}) => {
 }
 
 export const setSessionCookie = (session) => {
-    Cookies.remove("session");
-    Cookies.set("session", session, { expires: 14 });
+    myStorage.removeItem('session');
+    myStorage.setItem('session', session);
 };
   
 export const getSessionCookie = () => {
-    const sessionCookie = Cookies.get("session");
-  
+    const sessionCookie = myStorage.getItem('session');
+
     if (sessionCookie === undefined) {
-      return {};
+      return null;
     } else {
       return JSON.parse(sessionCookie);
     }
 };
 
 export const removeSessionCookie = () => {
-    Cookies.remove("session");
+    myStorage.removeItem('session');
 };
 
 export default postData;

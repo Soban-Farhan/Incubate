@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/master.css';
 import banner from '../images/loginBanner.jpg'
 import sha256 from 'js-sha256';
-import postData from '../includes/function'
+import postData, { setSessionCookie, getSessionCookie } from '../includes/function'
 
 // Bootstrap
 import { Container, Col, Row, Card } from 'react-bootstrap';
@@ -30,6 +30,12 @@ class Register extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+      if (getSessionCookie() !== null) {
+          window.location = "/Board"
+      }
     }
 
     handleSubmit = async (e) => {
@@ -87,9 +93,9 @@ class Register extends Component {
               password: sha256(password)
           })
           .then((res) => {
-              if (res === "OK") {
+              if (res.status === "OK") {
                   console.log(res)
-              } else if (res === "FOUND") {
+              } else if (res.status === "FOUND") {
                   this.setState({
                       otherError: [
                           true,

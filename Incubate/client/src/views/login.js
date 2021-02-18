@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/master.css';
 import banner from '../images/loginBanner.jpg'
 import sha256 from 'js-sha256';
-import postData from '../includes/function'
+import postData, { setSessionCookie, getSessionCookie } from '../includes/function'
 
 // Bootstrap
 import { Container, Col, Row, Card } from 'react-bootstrap';
@@ -17,11 +17,16 @@ class Login extends Component {
             emailError: null,
             passwordError: null,
             otherError: [ false, "" ],
-            // isLoading: true,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidMount() {
+        if (getSessionCookie() !== null) {
+            window.location = "/Board"
+        }
     }
 
     handleSubmit = async (e) => {
@@ -60,9 +65,9 @@ class Login extends Component {
                 password: sha256(password)
             })
             .then((res) => {
-                if (res === "OK") {
-                    console.log(res)
-                } else if (res === "NOT FOUND") {
+                if (res.status === "OK") {
+                    setSessionCookie(res.userID)
+                } else if (res.status === "NOT FOUND") {
                     this.setState({
                         otherError: [
                             true,
@@ -79,15 +84,6 @@ class Login extends Component {
                     })
                 } 
             })
-            .catch(
-                this.setState({
-                    otherError: [
-                        true,
-                        "The server encountered an internal error or misconfiguration and " 
-                        + "was unable to complete your request." ]
-                })
-            )
-
         }
     };
 
