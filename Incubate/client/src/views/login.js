@@ -67,6 +67,7 @@ class Login extends Component {
             .then((res) => {
                 if (res.status === "OK") {
                     setSessionCookie(res.userID)
+                    window.location = "/boards";
                 } else if (res.status === "NOT FOUND") {
                     this.setState({
                         otherError: [
@@ -96,61 +97,81 @@ class Login extends Component {
     render() {
         return (
             <Container className="v-center">
-                <Card style={{ boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.15)", border: "none" }}>
-                    <img className="card-img-top img-fluid" src={banner} alt="" />
+              <Card style={{ boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.15)", border: "none" }}>
+                <Row className="h-100">
+                  <Col>
                     <div className="card-body">
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="p-4" />
-                            <Row>
-                                <Col lg={{ span: 8, offset: 2 }}>
-                                    { this.state.otherError[0] ? 
-                                        <Row>
-                                            <Col lg={12}>
-                                                <p className="p-4 font-karla text-center text-light bg-danger rounded">
-                                                    { this.state.otherError[1] }
-                                                </p>
-                                            </Col>
-                                            <div className="p-3" />
-                                        </Row>
-                                    : <></> }
-                                    <div className="p-1" />
-                                    <Row>       
-                                        <Col lg={2} className="text-left">
-                                            <label className="font-karla"> <strong> Email: </strong> </label>
-                                        </Col>
-                                        <Col lg={10}>
-                                            <input name="email" className="input-style font-karla" 
-                                                value={this.state.email} onChange={this.handleChange} />
-                                            <div style={{ color: "red" }}>
-                                                <p> { this.state.emailError != null ? <><i class="fas fa-exclamation-circle"/> {this.state.emailError}</> : "" } &nbsp; </p>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                    <p className="p-1"></p>
+                      <form onSubmit={this.handleSubmit}>
+                        <div className="p-2" />
+                        <Row>
+                            <Col lg={{ span: 10, offset: 1 }}>
+                              <p className="font-karla-heavy">
+                                Welcome back!
+                              </p>
+                              <p className="font-karla">
+                                We're so excited to see you again!
+                              </p>
+                              <div className="p-3" />
+                                { this.state.otherError[0] ? 
                                     <Row>
-                                        <Col lg={2}>
-                                            <label className="font-karla"> <strong> Password: </strong> </label>
+                                        <Col lg={12}>
+                                            <p className="p-4 font-karla text-center text-light bg-danger rounded">
+                                                { this.state.otherError[1] }
+                                            </p>
                                         </Col>
-                                        <Col lg={10}>
-                                            <input name="password" type="password" className="input-style font-karla" 
-                                                value={this.state.password} onChange={this.handleChange} />
-                                            <div style={{ color: "red" }}>
-                                            <p> { this.state.passwordError != null ? <><i class="fas fa-exclamation-circle"/> {this.state.passwordError}</> : "" } &nbsp; </p>
-                                            </div>
-                                        </Col>
+                                        <div className="p-3" />
                                     </Row>
-                                    <Row>
-                                        <Col lg={{ span: 10, offset: 2 }} className="font-karla">
-                                            <button type="submit" className="btn btn-outline-dark btn-md font-karla"> &nbsp;&nbsp; Login &nbsp;&nbsp; </button>
-                                            <span> &nbsp; or &nbsp;<a href="/Identity/Account/Register">Sign Up </a></span>
-                                        </Col>
-                                    </Row>
-                                    <div className="p-3"/>
-                                </Col>
-                            </Row>
-                        </form>
+                                : <></> }
+                                <div className="p-1" />
+                                <Row>       
+                                    <Col lg={12} className="text-left">
+                                        <label className="font-karla"> <strong> Email: </strong> </label>
+                                    </Col>
+                                    <Col lg={12}>
+                                        <input name="email" className="input-style font-karla" 
+                                            value={this.state.email} onChange={this.handleChange} />
+                                        <div style={{ color: "red" }}>
+                                            <p> { this.state.emailError != null ? <><i className="fas fa-exclamation-circle"/> {this.state.emailError}</> : "" } &nbsp; </p>
+                                        </div>
+                                    </Col>
+                                </Row>
+                                <div className="p-1" />
+                                <Row>
+                                    <Col lg={12}>
+                                        <label className="font-karla"> <strong> Password: </strong> </label>
+                                    </Col>
+                                    <Col lg={12}>
+                                        <input name="password" type="password" className="input-style font-karla" 
+                                            value={this.state.password} onChange={this.handleChange} />
+                                        <div style={{ color: "red" }}>
+                                            <p> { this.state.passwordError != null ? <><i class="fas fa-exclamation-circle"/> {this.state.passwordError}</> : null }</p>
+                                        </div>
+                                        <div className="p-1" />
+                                        <p className="font-karla-small">
+                                            <a href="#"> Forgot your password? </a>
+                                        </p>
+                                        <div className="p-2" />
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col className="font-karla">
+                                        <button type="submit" className="btn btn-outline-dark btn-md font-karla container-fluid">Login</button>
+                                        <div className="p-2" />
+                                        <p className="font-karla-small">
+                                            Need an account? <a href="/register"> Register </a>
+                                        </p>
+                                    </Col>
+                                </Row>
+                                <div className="p-3"/>
+                            </Col>
+                        </Row>
+                      </form>
                     </div>
-                </Card>
+                  </Col>
+                  <Col lg={5} className="p-0 center-image" style={{ backgroundImage: "url(" + banner + ")" }}>
+                  </Col>
+                </Row>
+              </Card>
             </Container>
         )
     };

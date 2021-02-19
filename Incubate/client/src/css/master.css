@@ -14,6 +14,14 @@ body {
     width: 100%;
 }
 
+.main-content {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #202020;
+    transition: .4s;
+}
+
 input[type=checkbox] {
     transform: scale(1.5);
 }

@@ -185,6 +185,9 @@ class Register extends Component {
                               <p className="font-karla-heavy">
                                 Sign Up
                               </p>
+                              <p className="font-karla">
+                                lets get you started!
+                              </p>
                               <div className="p-3" />
                                 { this.state.otherError[0] ? 
                                     <Row>
@@ -288,8 +291,11 @@ class Register extends Component {
                                 </Row>
                                 <Row>
                                     <Col className="font-karla">
-                                        <button type="submit" className="btn btn-outline-dark btn-md font-karla"> &nbsp;&nbsp; Register &nbsp;&nbsp; </button>
-                                        <span> &nbsp; or &nbsp;<a href="/Identity/Account/Login">Sign In </a></span>
+                                        <button type="submit" className="btn btn-outline-dark btn-md font-karla container-fluid"> Register </button>
+                                        <div className="p-2" />
+                                        <p className="font-karla-small">
+                                            <a href="/login"> Already have an account? </a>
+                                        </p>
                                     </Col>
                                 </Row>
                                 <div className="p-3"/>
