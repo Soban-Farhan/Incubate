@@ -1,4 +1,4 @@
-var myStorage = window.sessionStorage;
+// var myStorage = ;
 
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
@@ -12,13 +12,13 @@ const postData = async (url = '', data = {}) => {
 }
 
 export const setSessionCookie = (session) => {
-    myStorage.removeItem('session');
-    myStorage.setItem('session', session);
+    window.sessionStorage.removeItem('session');
+    window.sessionStorage.setItem('session', session);
 };
   
 export const getSessionCookie = () => {
-    const sessionCookie = myStorage.getItem('session');
-
+    const sessionCookie = window.sessionStorage.getItem('session');
+    
     if (sessionCookie === undefined) {
       return null;
     } else {
@@ -27,7 +27,7 @@ export const getSessionCookie = () => {
 };
 
 export const removeSessionCookie = () => {
-    myStorage.removeItem('session');
+    window.sessionStorage.removeItem('session');
 };
 
 export default postData;

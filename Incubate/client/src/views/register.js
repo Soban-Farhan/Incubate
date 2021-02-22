@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/master.css';
 import banner from '../images/loginBanner.jpg'
 import sha256 from 'js-sha256';
-import postData, { setSessionCookie, getSessionCookie } from '../includes/function'
+import postData from '../includes/function'
 
 // Bootstrap
 import { Container, Col, Row, Card } from 'react-bootstrap';
@@ -30,12 +30,6 @@ class Register extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-    }
-
-    componentDidMount() {
-      if (getSessionCookie() !== null) {
-          window.location = "/Board"
-      }
     }
 
     handleSubmit = async (e) => {
@@ -94,7 +88,7 @@ class Register extends Component {
           })
           .then((res) => {
               if (res.status === "OK") {
-                  console.log(res)
+                  window.location = "/login"
               } else if (res.status === "FOUND") {
                   this.setState({
                       otherError: [
@@ -159,7 +153,7 @@ class Register extends Component {
           } else {
             this.setState({ hasUpperCase: false })
           }
-          if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(val)) {
+          if (/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(val)) {
             this.setState({ hasCharacter: true })
           } else {
             this.setState({ hasCharacter: false })

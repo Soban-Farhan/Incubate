@@ -4,15 +4,19 @@ import banner from '../images/tester-min.png'
 import Login from './login.js'
 import Register from './register.js'
 
+import { getSessionCookie } from '../includes/function'
 
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
 
 class Auth extends Component {
-
-    constructor() {
-        super();
-    }
     
+    componentDidMount() {
+        if (getSessionCookie() !== null) {
+            console.log(getSessionCookie())
+            window.location = "/boards"
+        }
+    }
+
     render() {
         return (
             <div className="main-content" style={ {
