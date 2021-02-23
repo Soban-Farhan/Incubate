@@ -1,5 +1,3 @@
-// var myStorage = ;
-
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -18,7 +16,7 @@ export const setSessionCookie = (session) => {
   
 export const getSessionCookie = () => {
     const sessionCookie = window.sessionStorage.getItem('session');
-    
+
     if (sessionCookie === undefined) {
       return null;
     } else {

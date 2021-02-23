@@ -21,5 +21,4 @@ I was think of using MERN stack as this application needs to visually appealing 
 <br/><br/>
 
 ## Current Development
-I'm currently looking into sockets.io rooms. Every board is going to have its own room for its conversation. Rooms are also going to be used to update views with the latest content.
-When a team member makes changes to the database, the views need to be changed for other people currently on the board.
+The development has completely shifter toward designing the layout and developing the features for boards, tabs, and task cards. Alongside, the authentication can maybe see more changes but, so far its done.

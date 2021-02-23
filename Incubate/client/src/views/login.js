@@ -142,7 +142,7 @@ class Login extends Component {
                                         </div>
                                         <div className="p-1" />
                                         <p className="font-karla-small">
-                                            <a href="#"> Forgot your password? </a>
+                                            <a href="/login"> Forgot your password? </a>
                                         </p>
                                         <div className="p-2" />
                                     </Col>
