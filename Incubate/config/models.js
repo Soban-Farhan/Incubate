@@ -29,6 +29,7 @@ const Board = db.define('Board', {
     userID: { type: DataTypes.INTEGER, references: { model: User, key: 'userID' }, allowNull: false },
     name: { type: DataTypes.STRING(50), allowNull: false, },
     description: { type: DataTypes.STRING, allowNull: true },
+    type: { type: DataTypes.STRING, defaultValue: "personal", allowNull: false },
     features: { 
         type: DataTypes.STRING, allowNull: false, 
         get() { 
