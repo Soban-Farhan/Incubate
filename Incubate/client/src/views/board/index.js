@@ -39,17 +39,17 @@ class Board extends Component {
                 <Nav variant="pills" className="flex-column">
                 <label className="font-karla-small"> PERSONAL </label>
                   <Nav.Item>
-                    <Nav.Link className="font-karla-small" eventKey="first"> <strong> Boards </strong> </Nav.Link>
+                    <Nav.Link className="font-karla-small" eventKey="first"><i className="fas fa-clipboard-list"/> &nbsp; <strong> Boards </strong> </Nav.Link>
                   </Nav.Item>
                   <div className="p-1" />
                   <Nav.Item>
-                    <Nav.Link className="font-karla-small" eventKey="second"> <strong> Tasks </strong> </Nav.Link>
+                    <Nav.Link className="font-karla-small" eventKey="second"><i className="fas fa-tasks"/> &nbsp; <strong> Tasks </strong> </Nav.Link>
                   </Nav.Item>
                   <div className="p-3" />
                   <label className="font-karla-small"> TEAMS </label>
-                  {/* <Nav.Item>
-                    <Nav.Link className="font-karla-small" eventKey="third"> <strong> Teams </strong> </Nav.Link>
-                  </Nav.Item> */}
+                  <Nav.Item>
+                    <Nav.Link className="font-karla-small" eventKey="third"><i className="fas fa-plus" /> &nbsp; <strong> Create a team </strong> </Nav.Link>
+                  </Nav.Item>
                 </Nav>
               </Col>
               <Col sm={1}>
