@@ -3,7 +3,7 @@
 body {
     height: 100%;
     transition: .3s all;
-    background-color: #edf0f2;
+    background-color: #fff;
 }
 
 .input-style {
@@ -54,6 +54,14 @@ input[type=checkbox] {
 .v-center {
     margin: 0; 
     position: absolute; 
+    top: 50%; left: 50%; 
+    -ms-transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
+}
+
+.v-relative-center {
+    margin: 0; 
+    position: relative; 
     top: 50%; left: 50%; 
     -ms-transform: translate(-50%, -50%); 
     transform: translate(-50%, -50%);
@@ -111,13 +119,20 @@ a {
 
 a:hover {
     color: #202020;
-    background-color: #ffffff9f;
+    background-color: #e3e6e9;
     transition: .4s;
+}
+
+.bg-dark {
+    background-color: #202020;
 }
 
 .nav-pills .nav-link.active {
     background-color: #202020;
     transition: .5s;
+}
+.border-rounded {
+    border-radius: 5px;
 }
 
 @media screen and (max-width: 990px) { 

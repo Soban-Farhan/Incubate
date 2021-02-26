@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-// import Tabs from 'react-bootstrap/Tabs'
-import { Container, Col, Row, Tab } from 'react-bootstrap';
+import { Container, Col, Row, Tab, Nav, Navbar } from 'react-bootstrap';
 
 import '../../css/master.css'
 import logo from '../../images/incuabte.png'
@@ -37,7 +34,7 @@ class Board extends Component {
             <Row className="h-100">
               <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
-                <label className="font-karla-small"> PERSONAL </label>
+                <label className="font-karla-small"><i className="fas fa-user" /> &nbsp; PERSONAL </label>
                   <Nav.Item>
                     <Nav.Link className="font-karla-small" eventKey="first"><i className="fas fa-clipboard-list"/> &nbsp; <strong> Boards </strong> </Nav.Link>
                   </Nav.Item>
@@ -46,7 +43,7 @@ class Board extends Component {
                     <Nav.Link className="font-karla-small" eventKey="second"><i className="fas fa-tasks"/> &nbsp; <strong> Tasks </strong> </Nav.Link>
                   </Nav.Item>
                   <div className="p-3" />
-                  <label className="font-karla-small"> TEAMS </label>
+                  <label className="font-karla-small"><i className="fas fa-users" /> &nbsp; TEAM </label>
                   <Nav.Item>
                     <Nav.Link className="font-karla-small" eventKey="third"><i className="fas fa-plus" /> &nbsp; <strong> Create a team </strong> </Nav.Link>
                   </Nav.Item>
@@ -58,7 +55,20 @@ class Board extends Component {
               <Col sm={8}>
                 <Tab.Content>
                   <Tab.Pane eventKey="first">
-                    Cupid laid by his brand and fell asleep:
+                    <Row className="h-100">
+                      <Col sm={4}>
+                        <p className="h-100 bg-light border-rounded">tester tester tester tester tester tester tester tester tester tester tester tester tester tester</p>
+                      </Col>
+                      <Col sm={4}>
+                        <div className="h-100 bg-light border-rounded">
+                          <div className="v-relative-center text-center">
+                            <button class="btn btn-md font-karla-small" style={{ borderRadius: "25px", width: "40px", height: "40px", backgroundColor: "#202020"}}>
+                              <i class="fas fa-plus text-light"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
                   </Tab.Pane>
                   <Tab.Pane eventKey="second">
                     A maid of Dian's this advantage found, And his love-kindling
