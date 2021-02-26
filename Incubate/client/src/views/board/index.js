@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Tab, Nav, Navbar } from 'react-bootstrap';
+import { Container, Col, Row, Tab, Nav, Navbar, Modal } from 'react-bootstrap';
 
 import '../../css/master.css'
 import logo from '../../images/incuabte.png'
 import { getSessionCookie } from '../../includes/function'
+import Create from "./create.js"
 
 class Board extends Component {
-    
+  
+  constructor() {
+    super();
+    this.state = {
+      show: false
+    }
+  }
+
   componentDidMount() {
-      if (getSessionCookie() === null) {
-          window.location = "/boards"
-      }
+    if (getSessionCookie() === null) {
+        window.location = "/boards"
+    }
   }
 
   render() {
@@ -62,16 +70,27 @@ class Board extends Component {
                       <Col sm={4}>
                         <div className="h-100 bg-light border-rounded">
                           <div className="v-relative-center text-center">
-                            <button class="btn btn-md font-karla-small" style={{ borderRadius: "25px", width: "40px", height: "40px", backgroundColor: "#202020"}}>
+                            <button class="btn btn-md font-karla-small" style={{ borderRadius: "25px", width: "40px", height: "40px", backgroundColor: "#202020"}}
+                              onClick={() => { this.setState({ show: true }); }} >
                               <i class="fas fa-plus text-light"></i>
                             </button>
                           </div>
                         </div>
                       </Col>
                     </Row>
+                    <Modal
+                      size="xl"
+                      show={this.state.show}
+                      onHide={() => this.setState({ show: false })}
+                      aria-labelledby="example-custom-modal-styling-title"
+                      centered >
+                      <Modal.Body>
+                      </Modal.Body>
+                  </Modal>
                   </Tab.Pane>
                   <Tab.Pane eventKey="second">
-                    A maid of Dian's this advantage found, And his love-kindling
+                    
+                    
                   </Tab.Pane>
                 </Tab.Content>
               </Col>
