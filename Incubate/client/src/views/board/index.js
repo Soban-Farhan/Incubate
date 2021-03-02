@@ -11,7 +11,7 @@ class Board extends Component {
   constructor() {
     super();
     this.state = {
-      show: false
+      show: true
     }
   }
 
@@ -84,7 +84,8 @@ class Board extends Component {
                       onHide={() => this.setState({ show: false })}
                       aria-labelledby="example-custom-modal-styling-title"
                       centered >
-                      <Modal.Body>
+                      <Modal.Body className="p-0">
+                        <Create/>
                       </Modal.Body>
                   </Modal>
                   </Tab.Pane>
