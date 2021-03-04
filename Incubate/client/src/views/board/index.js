@@ -11,7 +11,7 @@ class Board extends Component {
   constructor() {
     super();
     this.state = {
-      show: true
+      show: false
     }
   }
 
@@ -70,9 +70,9 @@ class Board extends Component {
                       <Col sm={4}>
                         <div className="h-100 bg-light border-rounded">
                           <div className="v-relative-center text-center">
-                            <button class="btn btn-md font-karla-small" style={{ borderRadius: "25px", width: "40px", height: "40px", backgroundColor: "#202020"}}
+                            <button className="btn btn-md font-karla-small" style={{ borderRadius: "25px", width: "40px", height: "40px", backgroundColor: "#202020"}}
                               onClick={() => { this.setState({ show: true }); }} >
-                              <i class="fas fa-plus text-light"></i>
+                              <i className="fas fa-plus text-light"></i>
                             </button>
                           </div>
                         </div>

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Tab, Nav, Navbar, Modal } from 'react-bootstrap';
 
+import {colors, feature} from "../../includes/baordData.js"
+import postData from '../../includes/function'
+
 class Create extends Component {
     
     constructor() {
@@ -9,8 +12,9 @@ class Create extends Component {
             boardName: "",
             boardDesc: "",
             boardNameError: null,
-            boardDescError: null,
-            background: "#0079bf",
+            feature: feature,
+            backgroundColor: "#0079bf",
+            backgroundImage: "",
             otherError: [ false, "" ]
         }
 
@@ -25,7 +29,6 @@ class Create extends Component {
         let url = "http://localhost:5000/api/board/create";
 
         let boardName = this.state.boardName;
-        let boardDesc = this.state.boardDesc;
 
         let isValid = true;
 
@@ -35,7 +38,16 @@ class Create extends Component {
             otherError: [ false, "" ]
         });
 
+        if (boardName.trim() === '') {
+            this.setState({ boardNameError: "Enter a board title." });
+            isValid = false;
+        }
 
+        console.log(this.state.feature)
+
+        if (isValid) {
+        
+        }
     }
 
     handleChange = (e) => {
@@ -45,17 +57,29 @@ class Create extends Component {
         
         this.setState({ [nam]: val });
 
+        if (nam === "backgroundColor") {
+            let test = feature;
+            test.background.value = val
+            test.background.type = "color"
+            this.setState({
+                feature: test,
+                backgroundImage: ""
+            })
+        } else if (nam === "backgroundImage") {
+            let test = feature;
+            test.background.value = val
+            test.background.type = "image"
+            this.setState({
+                feature: test,
+                backgroundColor: ""
+            })
+        }
+        
+        console.log(this.state.feature)
     }
 
-    // handleButtonClick = (e) => {
-
-    //     let val = e.target.value;
-        
-    //     this.setState({ background: val });
-    // }
-
-
     render() {
+        
         return  <Row className="h-100">
                     <Col sm={{ span: 6, offset: 0}}>
                         <div className="p-4">
@@ -82,7 +106,7 @@ class Create extends Component {
                                         <label className="font-karla"> <strong> Description: </strong> </label>
                                     </Col>
                                     <Col lg={12}>
-                                        <textarea name="boardDesc" type="text" className="form-control font-karla" 
+                                        <textarea name="boardDesc" type="text" className="form-control font-karla" placeholder="optional"
                                             value={this.state.boardDesc} onChange={this.handleChange} style={{ height: "100px"}}></textarea>
                                         <div style={{ color: "red" }}>
                                             <p> { this.state.boardDescError != null ? <><i className="fas fa-exclamation-circle"/> {this.state.boardDescError}</> : "" } &nbsp; </p>
@@ -95,70 +119,29 @@ class Create extends Component {
                                     </Col>
                                     <Col lg={12}>
                                         <Row>
-                                            <Col xs={4} sm={2}>
-                                                <div className="p-1" />
-                                                <button name="background" value="#0079bf" className="checkbox-design btn btn-sm text-center text-light" 
-                                                    style={{ backgroundColor: "#0079bf" }} onClick={this.handleChange} > 
-                                                    { this.state.background === "#0079bf" ? <i className="fas fa-check"/> : null }
-                                                </button>
-                                            </Col>
-                                            <Col xs={4} sm={2}>
-                                                <div className="p-1" />
-                                                <button name="background" value="#d29034" className="checkbox-design btn btn-sm text-center text-light" 
-                                                    style={{ backgroundColor: "#d29034" }} onClick={this.handleChange} > 
-                                                    { this.state.background === "#d29034" ? <i className="fas fa-check"/> : null }
-                                                </button>
-                                            </Col>
-                                            <Col xs={4} sm={2}>
-                                                <div className="p-1" />
-                                                <button name="background" value="#519839" className="checkbox-design btn btn-sm text-center text-light" 
-                                                    style={{ backgroundColor: "#519839" }} onClick={this.handleChange} > 
-                                                    { this.state.background === "#519839" ? <i className="fas fa-check"/> : null }
-                                                </button>
-                                            </Col>
-                                            <Col xs={4} sm={2}>
-                                                <div className="p-1" />
-                                                <button name="background" value="#b04632" className="checkbox-design btn btn-sm text-center text-light" 
-                                                    style={{ backgroundColor: "#b04632" }} onClick={this.handleChange} > 
-                                                    { this.state.background === "#b04632" ? <i className="fas fa-check"/> : null }
-                                                </button>
-                                            </Col>
-                                            <Col xs={4} sm={2}>
-                                                <div className="p-1" />
-                                                <button name="background" value="#89609e" className="checkbox-design btn btn-sm text-center text-light" 
-                                                    style={{ backgroundColor: "#89609e" }} onClick={this.handleChange} > 
-                                                    { this.state.background === "#89609e" ? <i className="fas fa-check"/> : null }
-                                                </button>
-                                            </Col>
-                                            <Col xs={4} sm={2}>
-                                                <div className="p-1" />
-                                                <button name="background" value="#cd5a91" className="checkbox-design btn btn-sm text-center text-light" 
-                                                    style={{ backgroundColor: "#cd5a91" }} onClick={this.handleChange} > 
-                                                    { this.state.background === "#cd5a91" ? <i className="fas fa-check"/> : null }
-                                                </button>
-                                            </Col>
-                                            {/* <Col xs={3}>
-                                            <div className="p-1" />
-                                                <button value="#d29034" className="checkbox-design btn btn-sm border-dark" style={{ backgroundColor: "#d29034" }}/>
-                                            </Col>
-                                            <Col xs={3}>
-                                                <div className="p-1" />
-                                                <button value="#000" className="checkbox-design btn btn-sm border-dark" style={{ backgroundColor: "#000" }}/>
-                                            </Col>
-                                            <Col xs={3}>
-                                                <div className="p-1" />
-                                                <button value="#000" className="checkbox-design btn btn-sm text-center text-light" style={{ backgroundColor: "#000" }}> 
-                                                    
-                                                </button>
-                                            </Col> */}
+                                            { colors.map((color) => (
+                                                <Col xs={4} sm={2}>
+                                                    <div className="p-1" />
+                                                    <button name="backgroundColor" type="button" value={color} className="checkbox-design btn btn-sm text-center text-light" 
+                                                        style={{ backgroundColor: color }} onClick={this.handleChange} > 
+                                                        { this.state.backgroundColor === color ? <i className="fas fa-check"/> : null }
+                                                    </button>
+                                                </Col>
+                                            )) }
                                         </Row>
+                                    </Col>
+                                </Row>
+                                <div className="p-3" />
+                                <Row>
+                                    <Col className="font-karla">
+                                        <button type="submit" className="btn btn-outline-dark btn-md font-karla container-fluid"> Create Board </button>
                                     </Col>
                                 </Row>
                             </form>
                         </div>
                     </Col>
-                    {/* <Col sm={7}>
-                    </Col> */}
+                    <Col sm={7}>
+                    </Col>
                 </Row>
     }
 
