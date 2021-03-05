@@ -19,8 +19,22 @@ body {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-color: #202020; */
     transition: .4s;
+}
+
+.center-background {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: .2s;
+}
+
+.board-cards {
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: .2s;
 }
 
 input[type=checkbox] {

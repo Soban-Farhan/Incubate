@@ -3,7 +3,7 @@ import { Container, Col, Row, Tab, Nav, Navbar, Modal } from 'react-bootstrap';
 
 import '../../css/master.css'
 import logo from '../../images/incuabte.png'
-import { getSessionCookie } from '../../includes/function'
+import postData, { getSessionCookie } from '../../includes/function'
 import Create from "./create.js"
 
 class Board extends Component {
@@ -11,13 +11,22 @@ class Board extends Component {
   constructor() {
     super();
     this.state = {
-      show: false
+      show: false,
+      data: []
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if (getSessionCookie() === null) {
         window.location = "/boards"
+    } else {
+      let url = "http://localhost:5000/api/board/get"
+      await postData(url, {
+        userID: getSessionCookie()
+      })
+      .then((res) => {
+        this.setState({data: res.data})
+      })
     }
   }
 
@@ -63,35 +72,35 @@ class Board extends Component {
               <Col sm={8}>
                 <Tab.Content>
                   <Tab.Pane eventKey="first">
+                    <div className="p-3"/>
                     <Row className="h-100">
+                      {this.state?.data.map((card) => (
+                        <Col sm={4}>
+                          <button className="board-cards border-rounded text-light center-background text-left container-fluid"
+                              style={{ backgroundColor: card.features.background.value, backgroundImage: "url(" + card.features.background.value + ")" }} >
+                            <p className="font-karla-small">
+                              <strong>{card.name}</strong>
+                            </p>
+                          </button>
+                          <div className="p-2"/>
+                        </Col>
+                      ))}
                       <Col sm={4}>
-                        <p className="h-100 bg-light border-rounded">tester tester tester tester tester tester tester tester tester tester tester tester tester tester</p>
-                      </Col>
-                      <Col sm={4}>
-                        <div className="h-100 bg-light border-rounded">
-                          <div className="v-relative-center text-center">
-                            <button className="btn btn-md font-karla-small" style={{ borderRadius: "25px", width: "40px", height: "40px", backgroundColor: "#202020"}}
-                              onClick={() => { this.setState({ show: true }); }} >
-                              <i className="fas fa-plus text-light"></i>
-                            </button>
-                          </div>
-                        </div>
+                        <button className="board-cards border-rounded text-center container-fluid"
+                            onClick={() => { this.setState({ show: true }); }} >
+                              <i className="fas fa-plus" />
+                        </button>
+                        <div className="p-2"/>
                       </Col>
                     </Row>
-                    <Modal
-                      size="xl"
-                      show={this.state.show}
-                      onHide={() => this.setState({ show: false })}
-                      aria-labelledby="example-custom-modal-styling-title"
-                      centered >
+                    <Modal size="xl" show={this.state.show}
+                      onHide={() => this.setState({ show: false })} centered >
                       <Modal.Body className="p-0">
                         <Create/>
                       </Modal.Body>
                   </Modal>
                   </Tab.Pane>
                   <Tab.Pane eventKey="second">
-                    
-                    
                   </Tab.Pane>
                 </Tab.Content>
               </Col>

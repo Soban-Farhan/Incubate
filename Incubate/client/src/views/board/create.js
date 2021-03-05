@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Col, Row, Tab, Nav, Navbar, Modal } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 
-import {colors, feature} from "../../includes/baordData.js"
-import postData from '../../includes/function'
+import {colors, images, feature} from "../../includes/boardData.js"
+import postData, { getSessionCookie } from '../../includes/function'
 
 class Create extends Component {
     
@@ -15,6 +15,7 @@ class Create extends Component {
             feature: feature,
             backgroundColor: "#0079bf",
             backgroundImage: "",
+            disabled: false,
             otherError: [ false, "" ]
         }
 
@@ -28,13 +29,14 @@ class Create extends Component {
 
         let url = "http://localhost:5000/api/board/create";
 
-        let boardName = this.state.boardName;
+        let boardName = this.state.boardName.trim();
+        let boardDesc = this.state.boardDesc.trim();
 
         let isValid = true;
 
         this.setState({
             boardNameError: null,
-            boardDescError: null,
+            disabled: false,
             otherError: [ false, "" ]
         });
 
@@ -43,57 +45,100 @@ class Create extends Component {
             isValid = false;
         }
 
-        console.log(this.state.feature)
-
         if (isValid) {
-        
+            await postData(url, { 
+                userID: getSessionCookie(),
+                boardName: boardName,
+                boardDesc: boardDesc,
+                feature: this.state.feature
+            })
+            .then((res) => {
+                if (res.status === "OK") {
+                    this.setState({ disabled: true })
+                    setTimeout(() => { window.location = "/boards" }, 2000)
+                } else {
+                    this.setState({
+                        otherError: [
+                            true,
+                            "The server encountered an internal error or misconfiguration and " 
+                            + "was unable to complete your request." ]
+                    })
+                } 
+            })
+            .catch(() => {
+                this.setState({
+                    otherError: [
+                        true,
+                        "The server encountered an internal error or misconfiguration and " 
+                        + "was unable to complete your request." ]
+                })
+            })
         }
     }
 
     handleChange = (e) => {
         
         let nam = e.target.name;
-        let val = e.target.type === 'checkbox' ? e.target.checked : e.target.value.trim();
+        let val = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         
         this.setState({ [nam]: val });
 
         if (nam === "backgroundColor") {
-            let test = feature;
-            test.background.value = val
-            test.background.type = "color"
+            let temp = feature;
+            temp.background.value = val
+            temp.background.type = "color"
             this.setState({
-                feature: test,
+                feature: temp,
                 backgroundImage: ""
             })
         } else if (nam === "backgroundImage") {
-            let test = feature;
-            test.background.value = val
-            test.background.type = "image"
+            let temp = feature;
+            temp.background.value = val
+            temp.background.type = "image"
             this.setState({
-                feature: test,
+                feature: temp,
                 backgroundColor: ""
             })
         }
-        
-        console.log(this.state.feature)
     }
 
     render() {
         
         return  <Row className="h-100">
-                    <Col sm={{ span: 6, offset: 0}}>
+                    <Col lg={6}>
                         <div className="p-4">
                             <p className="font-karla-heavy">
                                 Let's get you started!
                             </p>
                             <div className="p-3" />
+                                { this.state.disabled ? 
+                                    <Row>
+                                        <Col lg={12}>
+                                            <p className="p-4 font-karla text-center text-light bg-success rounded">
+                                                Success! Your new board was created.
+                                            </p>
+                                        </Col>
+                                        <div className="p-3" />
+                                    </Row>
+                                : <></> }
+                                { this.state.otherError[0] ? 
+                                    <Row>
+                                        <Col lg={12}>
+                                            <p className="p-4 font-karla text-center text-light bg-danger rounded">
+                                                { this.state.otherError[1] }
+                                            </p>
+                                        </Col>
+                                        <div className="p-3" />
+                                    </Row>
+                                : <></> }
+                            <div className="p-1" />
                             <form onSubmit={this.handleSubmit}>
                                 <Row>
                                     <Col lg={12} className="text-left">
                                         <label className="font-karla"> <strong> Board title: </strong> </label>
                                     </Col>
                                     <Col lg={12}>
-                                        <input name="boardName" type="text" className="form-control font-karla" 
+                                        <input name="boardName" type="text" className="form-control font-karla-small" 
                                             value={this.state.boardName} onChange={this.handleChange} />
                                         <div style={{ color: "red" }}>
                                             <p> { this.state.boardNameError != null ? <><i className="fas fa-exclamation-circle"/> {this.state.boardNameError}</> : "" } &nbsp; </p>
@@ -106,7 +151,7 @@ class Create extends Component {
                                         <label className="font-karla"> <strong> Description: </strong> </label>
                                     </Col>
                                     <Col lg={12}>
-                                        <textarea name="boardDesc" type="text" className="form-control font-karla" placeholder="optional"
+                                        <textarea name="boardDesc" type="text" className="form-control font-karla-small" placeholder="optional"
                                             value={this.state.boardDesc} onChange={this.handleChange} style={{ height: "100px"}}></textarea>
                                         <div style={{ color: "red" }}>
                                             <p> { this.state.boardDescError != null ? <><i className="fas fa-exclamation-circle"/> {this.state.boardDescError}</> : "" } &nbsp; </p>
@@ -115,7 +160,7 @@ class Create extends Component {
                                 </Row>
                                 <Row>
                                     <Col lg={12} className="text-left">
-                                        <label className="font-karla"> <strong> Background: </strong> </label>
+                                        <label className="font-karla"> <strong> Colors: </strong> </label>
                                     </Col>
                                     <Col lg={12}>
                                         <Row>
@@ -133,14 +178,39 @@ class Create extends Component {
                                 </Row>
                                 <div className="p-3" />
                                 <Row>
+                                    <Col lg={12} className="text-left">
+                                        <label className="font-karla"> <strong> Images: </strong> </label>
+                                    </Col>
+                                    <Col lg={12}>
+                                        <Row>
+                                            { images.map((image) => (
+                                                <Col xs={4} sm={4}>
+                                                    <div className="p-1" />
+                                                    <button name="backgroundImage" type="button" value={image} className="checkbox-design btn btn-sm text-center text-light" 
+                                                        style={{ backgroundImage: "url(" + image + ")" }} onClick={this.handleChange} > 
+                                                        { this.state.backgroundImage === image ? <i className="fas fa-check"/> : null }
+                                                    </button>
+                                                </Col>
+                                            )) }
+                                        </Row>
+                                    </Col>
+                                </Row>
+                                <div className="p-3" />
+                                <Row>
                                     <Col className="font-karla">
-                                        <button type="submit" className="btn btn-outline-dark btn-md font-karla container-fluid"> Create Board </button>
+                                        <button type="submit" className="btn btn-outline-dark btn-md font-karla container-fluid" disabled={this.state.disabled}> Create Board </button>
                                     </Col>
                                 </Row>
                             </form>
                         </div>
                     </Col>
-                    <Col sm={7}>
+                    <Col lg={6}>
+                        <Container className="p-0 h-100" fluid>
+                            <div style={{ 
+                                    backgroundImage: "url(" + this.state.backgroundImage + ")",
+                                    backgroundColor: this.state.backgroundColor 
+                                }} className="p-5 h-100 center-background" />
+                        </Container>
                     </Col>
                 </Row>
     }

@@ -39,14 +39,51 @@ router.post('/auth/register', async (req, res) => {
                 return res.status(409).json({ status: "FOUND" })
             }
         })
-        .catch(err => {
+        .catch((err) => {
             return res.status(500).json(err)
         })
-    } catch (error) {
+    } catch (err) {
         return res.status(500).json(err)
     }
 })
 
+router.post('/board/create', async (req, res) => {
+    try {
+        await models.Board.create({
+            name: req.body.boardName,
+            description: req.body.boardDesc,
+            features: req.body.feature,
+            userID: req.body.userID
+        })
+        .then(() => {
+            return res.status(200).json({ status: "OK" })
+        })
+        .catch((err) => {
+            return res.status(500).json(err)
+        })
+
+    } catch (err) {
+        return res.status(500).json(err)
+    }
+})
+
+router.post('/board/get', async (req, res) => { 
+    try {
+        await models.Board.findAll({
+            where: { userID: req.body.userID },
+            include: { model: Board },
+        })
+        .then((data) => {
+            return res.status(200).json({ status: "OK", data: data })
+        })
+        .catch((err) => {
+            return res.status(500).json(err)
+        })
+
+    } catch (err) {
+        return res.status(500).json(err)
+    }
+})
 
 // Database Related
 router.get('/create', async (req, res) => {
