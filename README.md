@@ -21,4 +21,4 @@ I was think of using MERN stack as this application needs to visually appealing 
 <br/><br/>
 
 ## Current Development
-The development has completely shifter toward designing the layout and developing the features for boards, tabs, and task cards. Alongside, the authentication can maybe see more changes but, so far its done.
+The development for board layout still continues but, the personal board creation function is complete. Next step is to start working on team board creating functionality.
