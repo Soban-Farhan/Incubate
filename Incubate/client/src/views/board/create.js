@@ -209,7 +209,7 @@ class Create extends Component {
                             <div style={{ 
                                     backgroundImage: "url(" + this.state.backgroundImage + ")",
                                     backgroundColor: this.state.backgroundColor 
-                                }} className="p-5 h-100 center-background" />
+                                }} className="p-4 h-100 center-background" />
                         </Container>
                     </Col>
                 </Row>

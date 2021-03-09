@@ -42,45 +42,57 @@ const Board = db.define('Board', {
     isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
 }, { tableName: 'tblBoards', createdAt: false, updatedAt: false, })
 
-const BoardTab = db.define('BoardTab', {
-    tabID: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, },
-    boardID: { type: DataTypes.INTEGER, references: { model: Board, key: 'boardID' }, allowNull: false },
-    name: { type: DataTypes.STRING(50), allowNull: false, },
-    description: { type: DataTypes.STRING, allowNull: true },
-    isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
-}, { tableName: 'tblBoardTabs', createdAt: false, updatedAt: false, })
+User.hasMany(Board, { foreignKey: { name: 'userID' } });
+Board.belongsTo(User, { foreignKey: { name: 'userID' }});
 
-const TabUser = db.define('TabUser', {
-    tabID: { type: DataTypes.INTEGER, primaryKey: true, references: { model: BoardTab, key: 'tabID' }, allowNull: false },
-    userID: { type: DataTypes.INTEGER,  primaryKey: true, references: { model: User, key: 'userID' }, allowNull: false },
-    dateJoined: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
-}, { tableName: 'tblTabUsers', createdAt: false, updatedAt: false, })
+// const BoardTab = db.define('BoardTab', {
+//     tabID: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, },
+//     boardID: { type: DataTypes.INTEGER, references: { model: Board, key: 'boardID' }, allowNull: false },
+//     name: { type: DataTypes.STRING(50), allowNull: false, },
+//     description: { type: DataTypes.STRING, allowNull: true },
+//     features: { 
+//         type: DataTypes.STRING, allowNull: false, 
+//         get() { 
+//             return JSON.parse(this.getDataValue('features')) 
+//         },
+//         set(val) { 
+//             this.setDataValue('features', JSON.stringify(val)) 
+//         } 
+//     },
+//     isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+// }, { tableName: 'tblBoardTabs', createdAt: false, updatedAt: false, })
 
-const TabCard = db.define('TabCard', {
-    cardID: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, },
-    tabID: { type: DataTypes.INTEGER, references: { model: BoardTab, key: 'tabID' }, allowNull: false },
-    name: { type: DataTypes.STRING(50), allowNull: false, },
-    isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
-}, { tableName: 'tblTabCards', createdAt: false, updatedAt: false, })
+// const TabUser = db.define('TabUser', {
+//     tabID: { type: DataTypes.INTEGER, primaryKey: true, references: { model: BoardTab, key: 'tabID' }, allowNull: false },
+//     userID: { type: DataTypes.INTEGER,  primaryKey: true, references: { model: User, key: 'userID' }, allowNull: false },
+//     dateJoined: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+//     isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+// }, { tableName: 'tblTabUsers', createdAt: false, updatedAt: false, })
 
-const CardTask = db.define('CardTask', {
-    taskID: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, },
-    cardID: { type: DataTypes.INTEGER, references: { model: TabCard, key: 'cardID' }, allowNull: false },
-    name: { type: DataTypes.STRING(50), allowNull: false, },
-    description: { type: DataTypes.STRING, allowNull: true },
-    additionalDetail: { 
-        type: DataTypes.STRING, allowNull: false, 
-        get() { 
-            return JSON.parse(this.getDataValue('additionalDetail')) 
-        },
-        set(val) { 
-            this.setDataValue('additionalDetail', JSON.stringify(val)) 
-        } 
-    },
-    dueDate: { type: DataTypes.DATE, allowNull: true },
-    isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
-}, { tableName: 'tblCardTasks', createdAt: false, updatedAt: false, })
+// const TabCard = db.define('TabCard', {
+//     cardID: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, },
+//     tabID: { type: DataTypes.INTEGER, references: { model: BoardTab, key: 'tabID' }, allowNull: false },
+//     name: { type: DataTypes.STRING(50), allowNull: false, },
+//     isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+// }, { tableName: 'tblTabCards', createdAt: false, updatedAt: false, })
+
+// const CardTask = db.define('CardTask', {
+//     taskID: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, },
+//     cardID: { type: DataTypes.INTEGER, references: { model: TabCard, key: 'cardID' }, allowNull: false },
+//     name: { type: DataTypes.STRING(50), allowNull: false, },
+//     description: { type: DataTypes.STRING, allowNull: true },
+//     additionalDetail: { 
+//         type: DataTypes.STRING, allowNull: false, 
+//         get() { 
+//             return JSON.parse(this.getDataValue('additionalDetail')) 
+//         },
+//         set(val) { 
+//             this.setDataValue('additionalDetail', JSON.stringify(val)) 
+//         } 
+//     },
+//     dueDate: { type: DataTypes.DATE, allowNull: true },
+//     isActive: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+// }, { tableName: 'tblCardTasks', createdAt: false, updatedAt: false, })
 
 
 const createAll = async () => {
@@ -109,8 +121,8 @@ module.exports = {
     User,
     Plan,
     Board,
-    BoardTab,
-    TabUser,
-    TabCard,
-    CardTask    
+    // BoardTab,
+    // TabUser,
+    // TabCard,
+    // CardTask    
 }

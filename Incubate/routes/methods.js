@@ -71,7 +71,10 @@ router.post('/board/get', async (req, res) => {
     try {
         await models.Board.findAll({
             where: { userID: req.body.userID },
-            include: { model: Board },
+            include: { 
+                model: models.User,
+                attributes: ["firstName", "lastName"]
+            }
         })
         .then((data) => {
             return res.status(200).json({ status: "OK", data: data })
