@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Col, Row, Tab, Nav, Navbar, Modal } from 'react-bootstrap';
 
+import { Link } from 'react-router-dom'
+
 import '../../css/master.css'
 import logo from '../../images/incuabte.png'
 import postData, { getSessionCookie } from '../../includes/function'
@@ -18,7 +20,7 @@ class Board extends Component {
 
   async componentDidMount() {
     if (getSessionCookie() === null) {
-        window.location = "/boards"
+        window.location = "/login"
     } else {
       let url = "http://localhost:5000/api/board/get"
       await postData(url, {
@@ -39,9 +41,9 @@ class Board extends Component {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto" />
             <Nav>
-              <a href="/logout">
+              <Link to={"/logout"}>
                 <button className="btn btn-outline-light btn-md font-karla">Log Out</button>
-              </a>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -76,12 +78,14 @@ class Board extends Component {
                     <Row className="h-100">
                       {this.state?.data.map((card) => (
                         <Col sm={4}>
-                          <button className="board-cards border-rounded text-light center-background text-left container-fluid"
-                              style={{ backgroundColor: card.features.background.value, backgroundImage: "url(" + card.features.background.value + ")" }} >
-                            <p className="font-karla-small">
-                              <strong>{card.name}</strong>
-                            </p>
-                          </button>
+                          <Link to={"board/" + card.boardID}>
+                            <button className="board-cards border-rounded text-light center-background text-left container-fluid"
+                                style={{ backgroundColor: card.features.background.value, backgroundImage: "url(" + card.features.background.value + ")" }} >
+                              <p className="font-karla-small">
+                                <strong>{card.name}</strong>
+                              </p>
+                            </button>
+                          </Link>
                           <div className="p-2"/>
                         </Col>
                       ))}

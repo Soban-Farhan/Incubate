@@ -23,12 +23,8 @@ class Auth extends Component {
                 height: "100vh",
                 backgroundImage: "url(" + banner + ")"
             } }>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path="/login" render={() => <Login /> } />
-                        <Route path="/register" render={() => <Register /> } />
-                    </Switch>
-                </BrowserRouter>
+                <Route path="/login" render={() => <Login /> } />
+                <Route path="/register" render={() => <Register /> } />
             </div>
         )
     }
