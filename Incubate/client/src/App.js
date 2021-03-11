@@ -7,7 +7,7 @@ import { getSessionCookie, removeSessionCookie } from './includes/function'
 // import Index from './views/index.js'
 import Board from './views/board/index.js'
 import Auth from './views/auth.js'
-import Tabs from "./views/board/tabs.js"
+import Tabs from "./views/board/tab/index.js"
 
 export const App = () => {
   return (
