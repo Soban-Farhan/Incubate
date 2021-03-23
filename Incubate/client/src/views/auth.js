@@ -6,7 +6,7 @@ import Register from './register.js'
 
 import { getSessionCookie } from '../includes/function'
 
-import { Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 class Auth extends Component {
     

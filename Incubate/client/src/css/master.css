@@ -37,6 +37,14 @@ body {
     transition: .2s;
 }
 
+.tab-cards {
+    height: 60px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: .2s;
+}
+
 input[type=checkbox] {
     transform: scale(1.5);
 }
@@ -134,10 +142,6 @@ a {
 a:hover {
     color: #202020;
     transition: .4s;
-}
-
-.tab-col {
-    
 }
 
 .bg-dark {

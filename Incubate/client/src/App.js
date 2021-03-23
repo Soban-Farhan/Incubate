@@ -3,6 +3,8 @@ import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import { getSessionCookie, removeSessionCookie } from './includes/function'
 
+
+
 // Views
 // import Index from './views/index.js'
 import Board from './views/board/index.js'
