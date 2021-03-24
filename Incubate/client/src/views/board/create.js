@@ -27,7 +27,7 @@ class Create extends Component {
 
         e.preventDefault();
 
-        let url = "http://localhost:5000/api/board/create";
+        let url = "http://localhost:5000/api/boards/create";
 
         let boardName = this.state.boardName.trim();
         let boardDesc = this.state.boardDesc.trim();

@@ -6,7 +6,7 @@ import { getSessionCookie, removeSessionCookie } from './includes/function'
 
 
 // Views
-// import Index from './views/index.js'
+import Index from './views/index.js'
 import Board from './views/board/index.js'
 import Auth from './views/auth.js'
 import Tabs from "./views/board/tab/index.js"
@@ -15,6 +15,7 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route exact path="/" component={Index} />
         <Route exact path="/login" component={Auth} />
         <Route exact path="/register" component={Auth} />
         <Route exact path="/boards" component={Board} />

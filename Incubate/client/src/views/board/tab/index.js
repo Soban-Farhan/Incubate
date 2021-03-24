@@ -12,12 +12,38 @@ class Tabs extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tabs: [[],[],[]]
+            tabs: [],
+            board: [],
         }
     }
 
-    componentDidMount() { 
-        const { match: { params } } = this.props;
+    async componentDidMount() {
+        
+        if (getSessionCookie() === null) {
+            window.location = "/login"
+        } else {
+
+            const { match: { params } } = this.props;
+
+            let url = "http://localhost:5000/api/board/get"
+            await postData(url, {
+                userID: getSessionCookie(),
+                boardID: params.boardID
+            })
+            .then((res) => {
+                this.setState({board: res.data})
+                if (this.state.board.features.background.type === "image") {
+                    document.body.style.backgroundImage = "url(" + this.state.board.features.background.value + ")";
+                } else {
+                    document.body.style.backgroundColor = this.state.board.features.background.value;
+                }
+            })
+        }
+    }
+
+    componentWillUnmount() {
+        document.body.style.backgroundImage = "";
+        document.body.style.backgroundColor = "";
     }
 
     render() {
@@ -41,35 +67,40 @@ class Tabs extends Component {
                     <Container fluid>
                         <Row>
                             <Col lg={{ span: 10, offset: 1 }}>
-                                <div className="tab-col p-2">
-                                    <Row className="h-100">
-                                        { this.state?.tabs.map((tab) => (
+                                <div className="p-1">
+                                    <Row className="h-100 tab-col">
+                                        {   this.state?.tabs.map((tab) => (
                                                 <Col xs={3} lg={1} className="p-1">
+                                                    <div className="p-1" />
                                                     <button className="tab-cards border-rounded text-center container-fluid" />
                                                     <div className="p-1" />
                                                 </Col>
                                             ))
                                         }
-                                        { this.state?.tabs.length !== 4 ?
-                                            <Col xs={3} lg={1} className="p-1">
-                                                <button className="tab-cards border-rounded text-center container-fluid">
-                                                    <i className="fas fa-plus" />
-                                                </button>
-                                            </Col> : ""
+                                        {   this.state?.tabs.length !== 4 ?
+                                                <Col xs={3} lg={1} className="p-1">
+                                                    <div className="p-1" />
+                                                    <button className="tab-cards border-rounded text-center container-fluid">
+                                                        <i className="fas fa-plus" />
+                                                    </button>
+                                                    <div className="p-1" />
+                                                </Col> 
+                                            : ""
                                         }
                                         
                                     </Row>
                                 </div> 
                             </Col>
                             <Col lg={{ span: 10, offset: 1 }}>
-                                <div className="p-2" />
-                                <Container fluid className="bg-light rounded p-3">
-                                </Container>
+                                <div className="p-2">
+                                    <Row className="h-100">
+
+                                    </Row>
+                                </div>
                             </Col>
                         </Row>
                     </Container>
                 </Container>
-            
         )
     }
 }

@@ -47,7 +47,7 @@ router.post('/auth/register', async (req, res) => {
     }
 })
 
-router.post('/board/create', async (req, res) => {
+router.post('/boards/create', async (req, res) => {
     try {
         await models.Board.create({
             name: req.body.boardName,
@@ -67,7 +67,7 @@ router.post('/board/create', async (req, res) => {
     }
 })
 
-router.post('/board/get', async (req, res) => { 
+router.post('/boards/get', async (req, res) => { 
     try {
         await models.Board.findAll({
             where: { userID: req.body.userID },
@@ -75,6 +75,26 @@ router.post('/board/get', async (req, res) => {
                 model: models.User,
                 attributes: ["firstName", "lastName"]
             }
+        })
+        .then((data) => {
+            return res.status(200).json({ status: "OK", data: data })
+        })
+        .catch((err) => {
+            return res.status(500).json(err)
+        })
+
+    } catch (err) {
+        return res.status(500).json(err)
+    }
+})
+
+router.post('/board/get', async (req, res) => { 
+    try {
+        await models.Board.findOne({
+            where: { 
+                userID: req.body.userID,
+                boardID: req.body.boardID,
+             }
         })
         .then((data) => {
             return res.status(200).json({ status: "OK", data: data })

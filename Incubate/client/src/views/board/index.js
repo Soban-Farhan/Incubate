@@ -22,7 +22,7 @@ class Board extends Component {
     if (getSessionCookie() === null) {
         window.location = "/login"
     } else {
-      let url = "http://localhost:5000/api/board/get"
+      let url = "http://localhost:5000/api/boards/get"
       await postData(url, {
         userID: getSessionCookie()
       })

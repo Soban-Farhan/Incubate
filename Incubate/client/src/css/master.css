@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@300;500;800&display=swap');
 
-body {
+html, body, #app, #app> div {
     height: 100%;
     transition: .3s all;
     background-color: #fff;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .input-style {
@@ -164,6 +167,11 @@ a:hover {
 .checkbox-design {
     width: 100%;
     height: 40px;
+}
+
+.tab-col {
+    background-color: #ffffff50;
+    border-radius: 7px;
 }
 
 @media screen and (max-width: 990px) { 
