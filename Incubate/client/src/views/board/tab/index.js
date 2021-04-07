@@ -32,11 +32,11 @@ class Tabs extends Component {
             })
             .then((res) => {
                 this.setState({board: res.data})
-                if (this.state.board.features.background.type === "image") {
-                    document.body.style.backgroundImage = "url(" + this.state.board.features.background.value + ")";
-                } else {
-                    document.body.style.backgroundColor = this.state.board.features.background.value;
-                }
+                // if (this.state.board.features.background.type === "image") {
+                //     document.body.style.backgroundImage = "url(" + this.state.board.features.background.value + ")";
+                // } else {
+                //     document.body.style.backgroundColor = this.state.board.features.background.value;
+                // }
             })
         }
     }
@@ -50,7 +50,7 @@ class Tabs extends Component {
         
         return (
                 <Container className="p-0" fluid>
-                    <Navbar collapseOnSelect expand="sm" className="bg-dark" variant="dark">
+                    {/* <Navbar collapseOnSelect expand="sm" className="bg-dark" variant="dark">
                         <Navbar.Brand><img src={logo} alt="" width={150}/></Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
@@ -62,34 +62,73 @@ class Tabs extends Component {
                                 </Link>
                             </Nav>
                         </Navbar.Collapse>
-                    </Navbar>
+                    </Navbar> */}
                     <div className="p-2" />
                     <Container fluid>
+                        <div className="p-4" />
                         <Row>
                             <Col lg={{ span: 10, offset: 1 }}>
-                                <div className="p-1">
-                                    <Row className="h-100 tab-col">
-                                        {   this.state?.tabs.map((tab) => (
-                                                <Col xs={3} lg={1} className="p-1">
-                                                    <div className="p-1" />
-                                                    <button className="tab-cards border-rounded text-center container-fluid" />
-                                                    <div className="p-1" />
-                                                </Col>
-                                            ))
-                                        }
-                                        {   this.state?.tabs.length !== 4 ?
-                                                <Col xs={3} lg={1} className="p-1">
-                                                    <div className="p-1" />
-                                                    <button className="tab-cards border-rounded text-center container-fluid">
-                                                        <i className="fas fa-plus" />
-                                                    </button>
-                                                    <div className="p-1" />
-                                                </Col> 
-                                            : ""
-                                        }
+                                <Row className="h-100 tab-col">
+                                    <Col xl={2}>
+                                        <div className="p-2" />
+                                        <Row>
+                                            <Col xs={6} xl={12}>
+                                                <Link to={""}>
+                                                    <div className="p-2" />
+                                                    <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-columns"/> &nbsp; Dashboard</button>
+                                                    <div className="p-2" />
+                                                </Link>
+                                            </Col>
+                                            <Col xs={6} xl={12}>
+                                                <Link to={""}>
+                                                    <div className="p-2" />
+                                                    <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-folder"/> &nbsp; Group Files</button>
+                                                    <div className="p-2" />
+                                                </Link>
+                                            </Col>
+                                            <Col xs={6} xl={12}>
+                                                <Link to={""}>
+                                                    <div className="p-2" />
+                                                    <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-tasks"/> &nbsp; My Task</button>
+                                                    <div className="p-2" />
+                                                </Link>
+                                            </Col>
+                                        </Row>
+                                        <div className="p-2" />
                                         
-                                    </Row>
-                                </div> 
+                                        {/* <Link to={""}>
+                                            <div className="p-2" />
+                                            <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-folder"/> &nbsp; Group Files</button>
+                                            <div className="p-2" />
+                                        </Link>
+                                        <Link to={""}>
+                                            <div className="p-2" />
+                                            <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-tasks"/> &nbsp; My Task</button>
+                                            <div className="p-2" />
+                                        </Link>
+                                        <div className="p-2" /> */}
+                                    </Col>
+                                    
+                                    {/* {   this.state?.tabs.map((tab) => (
+                                            <Col xs={3} lg={1} className="p-1">
+                                                <div className="p-1" />
+                                                <button className="tab-cards border-rounded text-center container-fluid" />
+                                                <div className="p-1" />
+                                            </Col>
+                                        ))
+                                    }
+                                    {   this.state?.tabs.length !== 4 ?
+                                            <Col xs={3} lg={1} className="p-1">
+                                                <div className="p-1" />
+                                                <button className="tab-cards border-rounded text-center container-fluid">
+                                                    <i className="fas fa-plus" />
+                                                </button>
+                                                <div className="p-1" />
+                                            </Col> 
+                                        : ""
+                                    }
+                                    */}
+                                </Row>
                             </Col>
                             <Col lg={{ span: 10, offset: 1 }}>
                                 <div className="p-2">
