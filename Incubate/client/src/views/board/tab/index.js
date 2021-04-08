@@ -69,65 +69,47 @@ class Tabs extends Component {
                         <Row>
                             <Col lg={{ span: 10, offset: 1 }}>
                                 <Row className="h-100 tab-col">
+                                    <Col xl={12}>
+                                        <div className="p-3" />
+                                    </Col>
                                     <Col xl={2}>
-                                        <div className="p-2" />
                                         <Row>
                                             <Col xs={6} xl={12}>
                                                 <Link to={""}>
                                                     <div className="p-2" />
-                                                    <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-columns"/> &nbsp; Dashboard</button>
+                                                    <button className="btn btn-md font-karla-small text-left"><i className="fas fa-columns"/> &nbsp;&nbsp; Dashboard</button>
                                                     <div className="p-2" />
                                                 </Link>
                                             </Col>
                                             <Col xs={6} xl={12}>
                                                 <Link to={""}>
                                                     <div className="p-2" />
-                                                    <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-folder"/> &nbsp; Group Files</button>
+                                                    <button className="btn btn-md font-karla-small text-left"><i className="fas fa-folder"/> &nbsp;&nbsp; Group Files</button>
                                                     <div className="p-2" />
                                                 </Link>
                                             </Col>
                                             <Col xs={6} xl={12}>
                                                 <Link to={""}>
                                                     <div className="p-2" />
-                                                    <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-tasks"/> &nbsp; My Task</button>
+                                                    <button className="btn btn-md font-karla-small text-left"><i className="fas fa-tasks"/> &nbsp;&nbsp; My Task</button>
                                                     <div className="p-2" />
                                                 </Link>
                                             </Col>
+                                            <Col xs={6} xl={12} className="text-center">
+                                                <Link to={""}>
+                                                    <div className="p-2" />
+                                                    <button className="btn btn-md btn-outline-dark font-karla-small text-left"><i class="fas fa-sign-out-alt"/> &nbsp;&nbsp; Log Out</button>
+                                                    <div className="p-2" />
+                                                </Link>
+                                            </Col>
+                                            <div className="p-3" />
                                         </Row>
-                                        <div className="p-2" />
-                                        
-                                        {/* <Link to={""}>
-                                            <div className="p-2" />
-                                            <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-folder"/> &nbsp; Group Files</button>
-                                            <div className="p-2" />
-                                        </Link>
-                                        <Link to={""}>
-                                            <div className="p-2" />
-                                            <button className="btn btn-md container-fluid font-karla-small text-left"><i className="fas fa-tasks"/> &nbsp; My Task</button>
-                                            <div className="p-2" />
-                                        </Link>
-                                        <div className="p-2" /> */}
                                     </Col>
-                                    
-                                    {/* {   this.state?.tabs.map((tab) => (
-                                            <Col xs={3} lg={1} className="p-1">
-                                                <div className="p-1" />
-                                                <button className="tab-cards border-rounded text-center container-fluid" />
-                                                <div className="p-1" />
-                                            </Col>
-                                        ))
-                                    }
-                                    {   this.state?.tabs.length !== 4 ?
-                                            <Col xs={3} lg={1} className="p-1">
-                                                <div className="p-1" />
-                                                <button className="tab-cards border-rounded text-center container-fluid">
-                                                    <i className="fas fa-plus" />
-                                                </button>
-                                                <div className="p-1" />
-                                            </Col> 
-                                        : ""
-                                    }
-                                    */}
+                                    <Col xl={10} className="p-0">
+                                        <Container fluid className="bg-light">
+                                            sdad
+                                        </Container>
+                                    </Col>
                                 </Row>
                             </Col>
                             <Col lg={{ span: 10, offset: 1 }}>
