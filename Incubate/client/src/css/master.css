@@ -99,6 +99,13 @@ input[type=checkbox] {
     background-repeat: no-repeat;
 }
 
+.font-karla-extra-small {
+    font-family: 'Karla';
+    font-weight: 300;
+    font-size: 15.5px;
+    line-height: 19px;
+}
+
 .font-karla-small {
     font-family: 'Karla';
     font-weight: 300;
@@ -160,6 +167,28 @@ a:hover {
     border: 1px solid #0000002d;
 }
 
+.border-rounded-top {
+    border-radius: 50px 50px 0px 0px;
+}
+
+.border-rounded-top-left {
+    border-radius: 50px 0px 0px 0px;
+    background-color: #fff;
+}
+
+.border-less-rounded-top-left {
+    border-radius: 15px 0px 0px 0px;
+    background-color: #f3f5f8;
+}
+
+.border-rounded-bottom {
+    border-radius: 0px 0px 50px 50px;
+}
+
+.border-rounded-all {
+    border-radius: 50px 50px 50px 50px;
+}
+
 .border-dark {
     border: 1px solid #000;
 }
@@ -172,6 +201,10 @@ a:hover {
 .tab-col {
     background-color: #fff;
     border-radius: 50px;
+}
+
+.bg-light {
+    background-color: #fcfdff !important;
 }
 
 @media screen and (max-width: 990px) { 
