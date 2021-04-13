@@ -41,13 +41,17 @@ class Tabs extends Component {
         }
     }
 
-    componentWillUnmount() {
-        document.body.style.backgroundImage = "";
-        document.body.style.backgroundColor = "";
-    }
+    // componentWillUnmount() {
+    //     document.body.style.backgroundImage = "";
+    //     document.body.style.backgroundColor = "";
+    // }
 
     render() {
-        
+        if (this.state.board.features.background.type === "image") {
+            const background = { backgroundImage: "url(" + "" + ")" }
+        } else {
+            const background = { backgroundColor: this.state.board.features.background.value + ")" }
+        }
         return (
                 <Container className="p-0" fluid>
                     {/* <Navbar collapseOnSelect expand="sm" className="bg-dark" variant="dark">
@@ -69,47 +73,77 @@ class Tabs extends Component {
                         <Row>
                             <Col lg={{ span: 10, offset: 1 }} className="border-rounded-all bg-light">
                                 <Row className="h-100">
-                                    <Col xl={12}>
-                                        <div className="p-4" />
+                                    <Col xl={12} style={ { backgroundImage: "url(" + '${this.state.board.features.background.value}%' + ")" } }>
+                                        <p className="p-4 m-0 text-center font-karla-normal text-light">
+                                            { this.state.board?.name}
+                                        </p>
                                     </Col>
-                                    <Col xl={2} className="bg-light">
-                                        <Row>
-                                            <Col xs={6} xl={12}>
-                                                <Link to={""}>
+                                    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                                        <Col xl={2} className="bg-light">
+                                            {/* <Nav variant="pills" className="flex-column">
+                                                <Nav.Item>
                                                     <div className="p-2" />
-                                                    <button className="btn btn-md font-karla-extra-small text-left"><i className="fas fa-columns"/> &nbsp;&nbsp; Dashboard</button>
+                                                    <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="first"><i className="fas fa-clipboard-list"/> &nbsp;&nbsp; <strong> Dashboard </strong> </Nav.Link>
                                                     <div className="p-2" />
-                                                </Link>
-                                            </Col>
-                                            <Col xs={6} xl={12}>
-                                                <Link to={""}>
+                                                </Nav.Item>
+                                                <div className="p-1" />
+                                                <Nav.Item>
                                                     <div className="p-2" />
-                                                    <button className="btn btn-md font-karla-extra-small text-left"><i className="fas fa-folder"/> &nbsp;&nbsp; Group Files</button>
+                                                    <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="second"><i className="fas fa-folder"/> &nbsp;&nbsp; <strong> Group Files </strong> </Nav.Link>
                                                     <div className="p-2" />
-                                                </Link>
-                                            </Col>
-                                            <Col xs={6} xl={12}>
-                                                <Link to={""}>
+                                                </Nav.Item>
+                                                <Nav.Item>
                                                     <div className="p-2" />
-                                                    <button className="btn btn-md font-karla-extra-small text-left"><i className="fas fa-tasks"/> &nbsp;&nbsp; My Task</button>
+                                                    <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="third"><i className="fas fa-tasks"/> &nbsp;&nbsp; <strong> My Task </strong> </Nav.Link>
                                                     <div className="p-2" />
-                                                </Link>
-                                            </Col>
-                                            <Col xs={6} xl={12} className="text-center">
-                                                <Link to={""}>
-                                                    <div className="p-2" />
-                                                    <button className="btn btn-md btn-outline-danger font-karla-extra-small text-left"><i className="fas fa-sign-out-alt"/> &nbsp;&nbsp; Log Out</button>
-                                                    <div className="p-2" />
-                                                </Link>
-                                                <div className="p-3" />
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                    <Col xl={10} className="border-less-rounded-top-left">
-                                    </Col>
-                                    {/* <Col xl={12} className="bg-light">
-                                        <div className="p-3" />
-                                    </Col> */}
+                                                </Nav.Item>
+                                            </Nav> */}
+                                            <Nav variant="pills">
+                                                <Row>
+                                                    <Col xs={4} md={12}>
+                                                        <div className="p-2" />
+                                                        <Nav.Item>
+                                                            <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="first"><i className="fas fa-clipboard-list"/>&nbsp;&nbsp; <strong> Dashboard </strong> </Nav.Link>
+                                                        </Nav.Item>
+                                                        <div className="p-2" />
+                                                    </Col>
+                                                    <Col xs={4} md={12}>
+                                                        <div className="p-2" />
+                                                        <Nav.Item>
+                                                            <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="second"><i className="fas fa-folder"/>&nbsp;&nbsp; <strong> Group Files </strong> </Nav.Link>
+                                                        </Nav.Item>
+                                                        <div className="p-2" />
+                                                    </Col>
+                                                    <Col xs={4} md={12}>
+                                                        <div className="p-2" />
+                                                        <Nav.Item>
+                                                            <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="third"><i className="fas fa-tasks"/>&nbsp;&nbsp; <strong> My Task </strong> </Nav.Link>
+                                                        </Nav.Item>
+                                                        <div className="p-2" />
+                                                    </Col>
+                                                    <Col md={12} className="text-center">
+                                                        <Link to={""}>
+                                                            <div className="p-2" />
+                                                            <button className="btn btn-md btn-outline-danger font-karla-small text-left"><i className="fas fa-sign-out-alt"/> &nbsp;&nbsp; Log Out</button>
+                                                            <div className="p-2" />
+                                                        </Link>
+                                                        <div className="p-3" />
+                                                    </Col>
+                                                </Row>
+                                            </Nav>
+                                        </Col>
+                                        <Col xl={10} className="border-less-rounded-top-left">
+                                            <div className="p-5"/>
+                                            {/* <Tab.Content>
+                                                <Tab.Pane eventKey="first">
+                                                    adasd
+                                                </Tab.Pane>
+                                            </Tab.Content> */}
+                                        </Col>
+                                        {/* <Col xl={12} className="bg-light">
+                                            <div className="p-3" />
+                                        </Col> */}
+                                    </Tab.Container>
                                 </Row>
                             </Col>
                             <Col lg={{ span: 10, offset: 1 }}>
