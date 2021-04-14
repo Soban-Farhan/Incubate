@@ -21,4 +21,5 @@ I was think of using MERN stack as this application needs to visually appealing 
 <br/><br/>
 
 ## Current Development
-The development for board layout still continues but, the personal board creation function is complete. Next step is to start working on team board creating functionality.
+The development for board layout still continues but, the personal board creation function is complete. Next step is to start working on team board creating functionality. <br/>
+I have also started to work on the tab functionality/design. Had a setup due to me getting sick but, now back to normal.
