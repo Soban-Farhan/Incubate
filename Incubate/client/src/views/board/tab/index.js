@@ -14,6 +14,7 @@ class Tabs extends Component {
         this.state = {
             tabs: [],
             board: [],
+            background: "",
         }
     }
 
@@ -32,46 +33,42 @@ class Tabs extends Component {
             })
             .then((res) => {
                 this.setState({board: res.data})
+                // let background;
                 // if (this.state.board.features.background.type === "image") {
-                //     document.body.style.backgroundImage = "url(" + this.state.board.features.background.value + ")";
+                //     background = { backgroundImage: "url(" + this.state.board.features.background.value + ")" }
                 // } else {
-                //     document.body.style.backgroundColor = this.state.board.features.background.value;
+                //     background = { backgroundColor: this.state.board.features.background.value }
                 // }
+
+                // this.setState({background: background})
             })
         }
     }
 
-    // componentWillUnmount() {
-    //     document.body.style.backgroundImage = "";
-    //     document.body.style.backgroundColor = "";
-    // }
+    componentWillUnmount() {
+        document.body.style.backgroundImage = "";
+        document.body.style.backgroundColor = "";
+    }
 
     render() {
 
-        let background = this.state.background;
+        let background;
+
+        if (this.state.board.features?.background.type === "image") {
+            background = { backgroundImage: "url(" + this.state.board.features?.background.value + ")" }
+        } else {
+            background = { backgroundColor: this.state.board.features?.background.value }
+        }
+        
 
         return (
                 <Container className="p-0" fluid>
-                    {/* <Navbar collapseOnSelect expand="sm" className="bg-dark" variant="dark">
-                        <Navbar.Brand><img src={logo} alt="" width={150}/></Navbar.Brand>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                        <Navbar.Collapse id="responsive-navbar-nav">
-                            <Nav className="mr-auto" />
-                            <Nav className="text-right">
-                            <div className="p-2" />
-                                <Link to={"/logout"}>
-                                    <button className="btn btn-outline-light btn-md font-karla">Log Out</button>
-                                </Link>
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar> 
-                    <div className="p-2" /> */}
                     <Container fluid className="v-center">
                         <div className="p-4" />
                         <Row>
-                            <Col lg={{ span: 10, offset: 1 }} className="border-rounded-all bg-light">
+                            <Col lg={{ span: 10, offset: 1 }} className="border-rounded-top bg-light">
                                 <Row className="h-100">
-                                    <Col xl={12} style={background}>
+                                    <Col xl={12} className="center-background border-rounded-top" style={background}>
                                         <p className="p-4 m-0 text-center font-karla-normal text-light">
                                             { this.state.board?.name}
                                         </p>
