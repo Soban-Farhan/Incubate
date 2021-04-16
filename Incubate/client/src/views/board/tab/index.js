@@ -47,11 +47,9 @@ class Tabs extends Component {
     // }
 
     render() {
-        if (this.state.board.features.background.type === "image") {
-            const background = { backgroundImage: "url(" + "" + ")" }
-        } else {
-            const background = { backgroundColor: this.state.board.features.background.value + ")" }
-        }
+
+        let background = this.state.background;
+
         return (
                 <Container className="p-0" fluid>
                     {/* <Navbar collapseOnSelect expand="sm" className="bg-dark" variant="dark">
@@ -73,7 +71,7 @@ class Tabs extends Component {
                         <Row>
                             <Col lg={{ span: 10, offset: 1 }} className="border-rounded-all bg-light">
                                 <Row className="h-100">
-                                    <Col xl={12} style={ { backgroundImage: "url(" + '${this.state.board.features.background.value}%' + ")" } }>
+                                    <Col xl={12} style={background}>
                                         <p className="p-4 m-0 text-center font-karla-normal text-light">
                                             { this.state.board?.name}
                                         </p>
