@@ -68,32 +68,26 @@ class Tabs extends Component {
                         <Row>
                             <Col lg={{ span: 10, offset: 1 }} className="border-rounded-top bg-light">
                                 <Row className="h-100">
-                                    <Col xl={12} className="center-background border-rounded-top" style={background}>
-                                        <p className="p-4 m-0 text-center font-karla-normal text-light">
+                                    {/* <Col xl={12} className="center-background border-rounded-top" style={background}>
+                                        <p className="p-3 m-0 text-center font-karla-normal text-light">
+                                            { this.state.board?.name}
+                                        </p>
+                                    </Col> */}
+                                    <Col xl={12}>
+                                        <div className="p-4"/>
+                                    </Col>
+                                    <Col xl={2}>
+                                        
+                                    </Col>
+                                    <Col xl={10}>
+                                        <p className="font-karla-normal">
                                             { this.state.board?.name}
                                         </p>
                                     </Col>
-                                    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                                    <Tab.Container defaultActiveKey="first">
                                         <Col xl={2} className="bg-light">
-                                            {/* <Nav variant="pills" className="flex-column">
-                                                <Nav.Item>
-                                                    <div className="p-2" />
-                                                    <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="first"><i className="fas fa-clipboard-list"/> &nbsp;&nbsp; <strong> Dashboard </strong> </Nav.Link>
-                                                    <div className="p-2" />
-                                                </Nav.Item>
-                                                <div className="p-1" />
-                                                <Nav.Item>
-                                                    <div className="p-2" />
-                                                    <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="second"><i className="fas fa-folder"/> &nbsp;&nbsp; <strong> Group Files </strong> </Nav.Link>
-                                                    <div className="p-2" />
-                                                </Nav.Item>
-                                                <Nav.Item>
-                                                    <div className="p-2" />
-                                                    <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey="third"><i className="fas fa-tasks"/> &nbsp;&nbsp; <strong> My Task </strong> </Nav.Link>
-                                                    <div className="p-2" />
-                                                </Nav.Item>
-                                            </Nav> */}
                                             <Nav variant="pills">
+                                                <div className="p-2" />
                                                 <Row>
                                                     <Col xs={4} md={12}>
                                                         <div className="p-2" />
@@ -116,6 +110,13 @@ class Tabs extends Component {
                                                         </Nav.Item>
                                                         <div className="p-2" />
                                                     </Col>
+                                                    <Col xs={4} md={12}>
+                                                        <div className="p-2" />
+                                                        <Nav.Item>
+                                                            <Nav.Link className="btn btn-md font-karla-extra-small text-left" eventKey=""><i className="fas fa-user-plus"/>&nbsp;&nbsp; <strong> Invite </strong> </Nav.Link>
+                                                        </Nav.Item>
+                                                        <div className="p-2" />
+                                                    </Col>
                                                     <Col md={12} className="text-center">
                                                         <Link to={""}>
                                                             <div className="p-2" />
@@ -127,17 +128,18 @@ class Tabs extends Component {
                                                 </Row>
                                             </Nav>
                                         </Col>
-                                        <Col xl={10} className="border-less-rounded-top-left">
-                                            <div className="p-5"/>
-                                            {/* <Tab.Content>
+                                        <Col xl={10}>
+                                            <Tab.Content>
                                                 <Tab.Pane eventKey="first">
                                                     adasd
                                                 </Tab.Pane>
-                                            </Tab.Content> */}
+                                            </Tab.Content>
+                                                {/* <Col>
+                                                </Col>
+                                                <Col xl={12} className="border-less-rounded-top-left">
+                                                    
+                                                </Col> */}
                                         </Col>
-                                        {/* <Col xl={12} className="bg-light">
-                                            <div className="p-3" />
-                                        </Col> */}
                                     </Tab.Container>
                                 </Row>
                             </Col>
